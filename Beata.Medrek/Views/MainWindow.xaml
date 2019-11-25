@@ -1,0 +1,139 @@
+﻿<Window x:Class="Beata.Medrek.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Beata.Medrek"
+        mc:Ignorable="d"
+        AllowsTransparency="False"
+        WindowState="Maximized"
+        WindowStyle="None"
+        Name="ShellWindow"
+        Background="{StaticResource BackgroundBrush}"
+        Title="Beata.Medrek"
+        Height="500"
+        local:WindowAttachedProperties.MonitorWindowState="True"
+        Width="1000">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+            ResizeBorderThickness="6"
+            CornerRadius="0"
+            GlassFrameThickness="0"
+            CaptionHeight="42"
+         />
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Style TargetType="{x:Type local:MainWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:MainWindow}">
+
+                        <!--Outer Border-->
+                        <Border BorderThickness="0"
+                                BorderBrush="{StaticResource LightGreenBrush}"
+                            Background="{StaticResource BackgroundBrush}">
+
+                            <!--First Grid-->
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="{Binding CaptionHeight,FallbackValue=42}"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!--Caption Bar Items-->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--Icon Button-->
+                                    <Button Command="{Binding ShowMenuCommand}"
+                                        Style="{StaticResource IconButton}" 
+                                        />
+
+                                    <!--Title Text-->
+                                    <TextBlock 
+                                               Grid.Column="1"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               TextAlignment="Center"
+                                               FontSize="{StaticResource Average}"
+                                              >
+                                        <Run Text="MED"/><Run FontFamily="{StaticResource FontAwesome}" Text="{StaticResource MedBook}"/>
+                                    </TextBlock>
+
+                                    <!--Window Buttons-->
+                                    <StackPanel Grid.Column="2"
+                                                Orientation="Horizontal">
+                                       
+                                        <!--Minimize Button-->
+                                        <Button Command="{Binding MinimizeCommand}"
+                                                Style="{StaticResource WindowMinimize}"                 
+                                                Content="{Binding WindowMinimizeImage}"/>
+
+                                        <!--Maximize Button-->
+                                        <Button Command="{Binding MaximizeCommand}"
+                                                Style="{StaticResource WindowMaximize}"
+                                                Content="{Binding WindowMaximizeImage}"/>
+
+                                        <!--Close Button-->
+                                        <Button Command="{Binding CloseCommand}"
+                                                Style="{StaticResource WindowClose}"
+                                                Content="{Binding WindowCloseImage}"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!--Main Window Content-->
+                                <Border
+                                    Grid.Row="1">
+                                    <ContentPresenter>
+                                       
+                                    </ContentPresenter>
+                                </Border>
+
+                                <Border Grid.Row="2" 
+                                        >
+                                    <!--Bottom Menu-->
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--Interpreter Label-->
+                                        <Label Grid.Column="0"
+                                               VerticalAlignment="Bottom"
+                                               Content="Ready!"/>
+
+                                        <!--Bottom Menu Items-->
+                                        <StackPanel VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Grid.Column="1" 
+                                                Orientation="Horizontal">
+                                            <Button Style="{StaticResource BottomMenu}" Content="&#xf095;"/>
+                                            <Button Style="{StaticResource BottomMenu}" Content="&#xf0e0;"/>
+                                            <Button Style="{StaticResource BottomMenu}" Content="&#xf013;"/>
+                                            <Button Style="{StaticResource BottomMenu}" Content="Beata" Padding="60 10"/>
+                                        </StackPanel>
+
+                                        <!--Version Text-->
+                                        <Label  VerticalAlignment="Bottom"
+                                                Grid.Column="2"
+                                                Content="V1.0.0"/>
+                                    </Grid>
+                                </Border>
+                             
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+</Window>

@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Beata.Medrek">
+
+
+    <Color x:Key="LightGreen"> #ccffcc</Color>
+    <SolidColorBrush x:Key="LightGreenBrush" Color="{StaticResource LightGreen}"/>
+
+    <Color x:Key="LightBlue">#666fff</Color>
+    <SolidColorBrush x:Key="LightBlueBrush" Color="{StaticResource LightBlue}"/>
+
+    <Color x:Key="VeryLightBlue">#666fff</Color>
+    <SolidColorBrush x:Key="VeryLightBlueBrush" Color="{StaticResource VeryLightBlue}"/>
+
+    <Color x:Key="Background">#ffffff</Color>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}"/>
+
+</ResourceDictionary>
