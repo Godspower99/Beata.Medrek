@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Windows.Input;
-namespace Beata.Medrek
+namespace Beata.Medrek.Core
 {
-    public class RelayCommand : ICommand
+    public class RelayParameterizedCommand : ICommand
     {
         public event EventHandler CanExecuteChanged = (sender, e) => { };
 
-        private Action _action;
+        private Action<object> _action;
 
         /// <summary>
         /// Default Constructors 
         /// </summary>
         /// <param name="action"></param>
-        public RelayCommand(Action action)
+        public RelayParameterizedCommand(Action<object> action)
         {
             _action = action;
         }
@@ -27,14 +27,13 @@ namespace Beata.Medrek
             return true;
         }
 
-
         /// <summary>
         /// Execute Command for running action
         /// </summary>
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            _action();
+            _action(parameter);
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Beata.Medrek
+namespace Beata.Medrek.Core
 {
     [ImplementPropertyChanged]
     public class BaseViewModel : INotifyPropertyChanged

@@ -7,8 +7,12 @@
     <FontFamily x:Key="FontAwesome">pack://application:,,,/Fonts/#FontAwesome</FontFamily>
     <FontFamily x:Key="LatoLightItalic">pack://application:,,,/Fonts/#Lato Light Italic</FontFamily>
     <FontFamily x:Key="LatoRegular">pack://application:,,,/Fonts/#Lato Regular</FontFamily>
-    <FontFamily x:Key="LatoBold">pack://application:,,,/Fonts/#Lato Heavy</FontFamily>
-    
+    <FontFamily x:Key="LatoBold">pack://application:,,,/Fonts/#Lato Bold</FontFamily>
+    <FontFamily x:Key="LatoThin">pack://application:,,,/Fonts/#Lato Thin</FontFamily>
+    <FontFamily x:Key="Terminax">pack://application:,,,/Fonts/#Terminax W02 Regular</FontFamily>
+    <FontFamily x:Key="Consolas">pack://application:,,,/Fonts/#Consolas</FontFamily>
+
+
     <!--Font Size-->
     <System:Double x:Key="Small">14</System:Double>
     <System:Double x:Key="Regular">18</System:Double>

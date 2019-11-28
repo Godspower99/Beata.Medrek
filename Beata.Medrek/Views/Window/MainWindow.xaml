@@ -4,15 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Beata.Medrek"
+        xmlns:core="clr-namespace:Beata.Medrek.Core;assembly=Beata.Medrek.Core"
         mc:Ignorable="d"
         AllowsTransparency="False"
         WindowState="Maximized"
+        MinHeight="{Binding MinimumHeight}"
+        MinWidth="{Binding MinimumWidth}"
         WindowStyle="None"
         Name="ShellWindow"
         Background="{StaticResource BackgroundBrush}"
         Title="Beata.Medrek"
         Height="500"
-        local:WindowAttachedProperties.MonitorWindowState="True"
         Width="1000">
 
     <WindowChrome.WindowChrome>
@@ -32,7 +34,7 @@
 
                         <!--Outer Border-->
                         <Border BorderThickness="0"
-                                BorderBrush="{StaticResource LightGreenBrush}"
+                                BorderBrush="{StaticResource VeryLightBlueBrush}"
                             Background="{StaticResource BackgroundBrush}">
 
                             <!--First Grid-->
@@ -77,7 +79,8 @@
                                                 Content="{Binding WindowMinimizeImage}"/>
 
                                         <!--Maximize Button-->
-                                        <Button Command="{Binding MaximizeCommand}"
+                                        <Button local:WindowAttachedProperties.WindowMaximized="{Binding WindowIsMaximized}"
+                                                Command="{Binding MaximizeCommand}"
                                                 Style="{StaticResource WindowMaximize}"
                                                 Content="{Binding WindowMaximizeImage}"/>
 
@@ -92,7 +95,13 @@
                                 <Border
                                     Grid.Row="1">
                                     <ContentPresenter>
-                                       
+                                        <ContentPresenter.Content>
+                                            <Border VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+                                                <Frame Content="{Binding ApplicationViewModel.CurrentPage, Source={x:Static core:ViewModelLocator.Instance},
+                                                                         Converter={local:ApplicationPageValueConverter}}"/>
+                                            </Border>
+                                        </ContentPresenter.Content>
                                     </ContentPresenter>
                                 </Border>
 

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Beata.Medrek.Core;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Beata.Medrek
@@ -20,11 +21,64 @@ namespace Beata.Medrek
         public ShellWindowViewModel(Window window)
         {
             _window = window;
+            _window.StateChanged += _window_StateChanged;
         }
         #endregion
 
         #region Public Properties
 
+        /// <summary>
+        /// Caption Height Of Window
+        /// </summary>
+        public double TitleHeight { get; set; } = 42;
+
+        /// <summary>
+        /// Caption Height Thickness Of Window 
+        /// </summary>
+        public Thickness TitleHeightThickness
+        {
+            get
+            {
+                return new Thickness(TitleHeight);
+            }
+        }
+
+        /// <summary>
+        /// Window Resize Border Value
+        /// </summary>
+        public int ResizeBorder { get; set; } = 6;
+
+        /// <summary>
+        /// Window Resize Border Value
+        /// </summary>
+        public Thickness ResizeBorderThickness
+        {
+            get
+            {
+                return new Thickness(ResizeBorder);
+            }
+        }
+
+        /// <summary>
+        /// Window state flags true if window is maximized
+        /// </summary>
+        public bool WindowIsMaximized
+        {
+            get
+            {
+                return _window.WindowState == WindowState.Maximized;
+            }
+        }
+
+        /// <summary>
+        /// Window Minimum Width
+        /// </summary>
+        public int MinimumWidth { get; set; } = 800;
+
+        /// <summary>
+        /// Window Minimum Height
+        /// </summary>
+        public int MinimumHeight { get; set; } = 700;
         #endregion
 
         #region Commands
@@ -77,10 +131,23 @@ namespace Beata.Medrek
 
         #region Helper Functions
 
-   
+
 
         #endregion
 
+        #region Event Listeners
+
+        /// <summary>
+        /// Listens For Window State Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _window_StateChanged(object sender, System.EventArgs e)
+        {
+            OnPropertyChanged(nameof(WindowIsMaximized));
+            OnPropertyChanged(nameof(ResizeBorderThickness));
+        }
+        #endregion
 
     }
 }

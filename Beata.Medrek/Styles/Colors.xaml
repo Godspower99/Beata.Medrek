@@ -9,10 +9,15 @@
     <Color x:Key="LightBlue">#666fff</Color>
     <SolidColorBrush x:Key="LightBlueBrush" Color="{StaticResource LightBlue}"/>
 
-    <Color x:Key="VeryLightBlue">#666fff</Color>
+    <Color x:Key="VeryLightBlue">#eaf0ff</Color>
     <SolidColorBrush x:Key="VeryLightBlueBrush" Color="{StaticResource VeryLightBlue}"/>
 
     <Color x:Key="Background">#ffffff</Color>
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}"/>
+    
+    <Color x:Key="ForegroundMain">#000000</Color>
+    <SolidColorBrush x:Key="ForegroundMainBrush" Color="{StaticResource ForegroundMain}"/>
 
+    <Color x:Key="ForegroundDark">Gray</Color>
+    <SolidColorBrush x:Key="ForegroundDarkBrush" Color="{StaticResource ForegroundDark}"/>
 </ResourceDictionary>
