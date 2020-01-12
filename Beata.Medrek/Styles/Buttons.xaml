@@ -18,7 +18,7 @@
                     <Border Background="{TemplateBinding Background}"
                             Padding="10">
                         <Viewbox>
-                            <TextBlock FontFamily="{StaticResource FontAwesome}"
+                            <TextBlock FontFamily="{StaticResource FontAwesome2}"
                                 Text="{StaticResource IconText}"/>
                         </Viewbox>
                     </Border>
@@ -35,7 +35,7 @@
         <Setter Property="BorderThickness" Value="1 0 1 0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesome2}"/>
         <Setter Property="FontSize" Value="{StaticResource Regular}"/>
         <Setter Property="Padding" Value="80 10"/>
         <Setter Property="Template">
@@ -95,15 +95,18 @@
     <Style TargetType="{x:Type Button}" x:Key="WindowClose">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+        <Setter Property="Padding" Value="0 0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
                     <Border Background="{TemplateBinding Background}"
-                            Padding="10">
-                        <TextBlock Padding="5 0" 
+                            Padding="{TemplateBinding Padding}"
+                            >
+                        <Label VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
                                 FontSize="{StaticResource Small}"
                                 FontFamily="{StaticResource FontAwesome}"
-                                Text="{StaticResource WindowCloseText}"/>
+                                Content="{TemplateBinding Content}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
@@ -119,28 +122,26 @@
     <Style TargetType="{x:Type Button}" x:Key="WindowMaximize">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-       <Setter Property="local:WindowAttachedProperties.WindowMaximized" Value="False"/>
-
+        <Setter Property="local:WindowAttachedProperties.WindowMaximized" Value="False"/>
+        <Setter Property="Padding" Value="0 0"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}"
-                            Padding="10">
-                        <TextBlock x:Name="text"
-                                Padding="5 0" 
-                                FontSize="{StaticResource Small}" 
-                                FontFamily="{StaticResource FontAwesome}"
-                                Text="{StaticResource WindowMaximizeText}">
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding local:WindowAttachedProperties.WindowMaximized,RelativeSource={x:Static RelativeSource.TemplatedParent}}" Value="true">
-                                            <Setter Property="Text" Value="{StaticResource WindowRestoreText}"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                            Padding="{TemplateBinding Padding}"        
+                           >
+                        <Grid>
+                            <!--Maximize Window Icon-->
+                            <Label x:Name="MaxText"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                  FontSize="{StaticResource Small}" 
+                                  FontFamily="{StaticResource FontAwesome}"
+                                  Content="{TemplateBinding Content}">
+                            </Label>
+                            
+                          
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
@@ -158,16 +159,19 @@
         <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
         <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"/>
+        <Setter Property="Padding" Value="0 0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}"
-                            Padding="10">
+                           Padding="{TemplateBinding Padding}"
+                            >
 
-                        <TextBlock Padding="5 0" 
+                        <Label VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
                                 FontSize="{StaticResource Small}" 
                                 FontFamily="{StaticResource FontAwesome}"
-                                Text="{StaticResource WindowMinimizeText}"/>
+                                Content="{TemplateBinding Content}"/>
                         
                     </Border>
                     <ControlTemplate.Triggers>
@@ -179,7 +183,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
     
     <!--Login Button-->
     <Style  TargetType="{x:Type Button}">
@@ -206,18 +209,18 @@
                             <DropShadowEffect BlurRadius="0" Opacity="0.3"/>
                         </Border.Effect>
                         <Grid>
-                            <TextBlock x:Name="loginText"
+                            <Label x:Name="loginText"
                                    FontFamily="{StaticResource Consolas}"
                                    FontSize="{TemplateBinding FontSize}"
                                     Visibility="{TemplateBinding local:IsBusyAttachedProperty.IsBusy,Converter={local:BooleanToVisibilityValueConverter}}"
-                                   Text="VALIDATE"
+                                   Content="{TemplateBinding Content}"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    Margin="{TemplateBinding Padding}" 
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
 
                             <TextBlock x:Name="IsBusyText"
                                        Style="{StaticResource SpinText}"
-                                   FontFamily="{StaticResource FontAwesome}"
+                                   FontFamily="{StaticResource FontAwesome2}"
                                    FontSize="{StaticResource Average}"
                                    Visibility="{TemplateBinding local:IsBusyAttachedProperty.IsBusy,Converter={local:BooleanToVisibilityValueConverter},ConverterParameter=true}"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -271,6 +274,95 @@
         </Style.Triggers>
     </Style>
 
+    <!--Main Menu Button Style-->
+    <Style TargetType="{x:Type Button}" x:Key="MainMenuButton">
+        <Setter Property="Padding" Value="20 50"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Padding="{TemplateBinding Padding}" 
+                            >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="0.2*"/>
+                            </Grid.RowDefinitions>
+                            
+                            <!--Icon Display Box-->
+                            <Border x:Name="iconBox"
+                                CornerRadius="7"
+                                Background="{StaticResource VeryLightBlueBrush}"
+                                    >
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="0"
+                                                   Opacity="0.1"/>
+                                </Border.Effect>
+                                
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard >
+                                                <DoubleAnimation To="1" Storyboard.TargetName="textBox" 
+                                                                 Storyboard.TargetProperty="Opacity"
+                                                                 Duration="0:0:.3"/>
+                                                <ColorAnimation To="{StaticResource LightBlue}" Storyboard.TargetName="iconBox" 
+                                                                 Storyboard.TargetProperty="Background.Color"
+                                                                 Duration="0:0:.3"/>
+                                                <ColorAnimation To="{StaticResource Background}" Storyboard.TargetName="iconText" 
+                                                                 Storyboard.TargetProperty="Foreground.Color"
+                                                                 Duration="0:0:.4"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
 
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard Storyboard.TargetName="textBox" Storyboard.TargetProperty="Opacity">
+                                                <DoubleAnimation To="0"
+                                                                 Duration="0:0:.3"/>
+                                                <ColorAnimation To="{StaticResource VeryLightBlue}" Storyboard.TargetName="iconBox" 
+                                                                 Storyboard.TargetProperty="Background.Color"
+                                                                 Duration="0:0:.3"/>
+                                                <ColorAnimation To="{StaticResource ForegroundDark}" Storyboard.TargetName="iconText" 
+                                                                 Storyboard.TargetProperty="Foreground.Color"
+                                                                 Duration="0:0:.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Border.Triggers>
+
+                                <Viewbox>
+                                    <!--Button Icon-->
+                                    <Label x:Name="iconText" 
+                                        Content="{TemplateBinding Content}"
+                                       Foreground="{StaticResource ForegroundDarkBrush}"
+                                       VerticalAlignment="Center"
+                                       VerticalContentAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="130"
+                                       FontFamily="{StaticResource FontAwesome2}"/>
+
+                                </Viewbox>    
+                            </Border>
+
+                            <!--Text Display Box-->
+                            <TextBlock x:Name="textBox" 
+                                    Text="{TemplateBinding Tag}"
+                                   FontFamily="{StaticResource LatoBold}"
+                                   Grid.Row="1"
+                                   Opacity="0"
+                                   FontSize="14"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>

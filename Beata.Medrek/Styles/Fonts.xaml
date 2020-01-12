@@ -4,7 +4,8 @@
                     xmlns:System="clr-namespace:System;assembly=mscorlib">
 
     <!--Font Family-->
-    <FontFamily x:Key="FontAwesome">pack://application:,,,/Fonts/#FontAwesome</FontFamily>
+    <FontFamily x:Key="FontAwesome">pack://application:,,,/Fonts/#Font Awesome 5 Free Regular</FontFamily>
+    <FontFamily x:Key="FontAwesome2">pack://application:,,,/Fonts/#FontAwesome</FontFamily>
     <FontFamily x:Key="LatoLightItalic">pack://application:,,,/Fonts/#Lato Light Italic</FontFamily>
     <FontFamily x:Key="LatoRegular">pack://application:,,,/Fonts/#Lato Regular</FontFamily>
     <FontFamily x:Key="LatoBold">pack://application:,,,/Fonts/#Lato Bold</FontFamily>
@@ -21,11 +22,20 @@
 
     <!--Font Images-->
     <System:String x:Key="IconText">&#xf234;</System:String>
-    <System:String x:Key="WindowCloseText">&#xf188;</System:String>
+    <System:String x:Key="WindowCloseText">&#xf410;</System:String>
     <System:String x:Key="WindowMinimizeText">&#xf2d1;</System:String>
     <System:String x:Key="WindowMaximizeText">&#xf2d0;</System:String>
     <System:String x:Key="WindowRestoreText">&#xf2d2;</System:String>
-    <System:String x:Key="Cross">&#xf654;</System:String>
-    <System:String x:Key="MedBook">&#xf02d;</System:String>
+    <System:String x:Key="UserIcon">&#xf007;</System:String>
+    <System:String x:Key="KeyIcon">&#xf084;</System:String>
+    <System:String x:Key="CogIcon">&#xf013;</System:String>
+    <System:String x:Key="UserCogIcon">&#xf4fe;</System:String>
+    <System:String x:Key="EnvelopeIcon">&#xf0e0;</System:String>
+    <System:String x:Key="DoubleArrowUP">&#xf102;</System:String>
+    <System:String x:Key="DoubleArrowDown">&#xf103;</System:String>
+    <System:String x:Key="UserPlus">&#xf234;</System:String>
+    <System:String x:Key="SearchIcon">&#xf002;</System:String>
+    <System:String x:Key="CloudUpload">&#xf0ee;</System:String>
+    <System:String x:Key="Cogs">&#xf085;</System:String>
 
 </ResourceDictionary>

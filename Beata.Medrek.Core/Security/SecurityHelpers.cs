@@ -5,6 +5,9 @@ using System.Security;
 
 namespace Beata.Medrek.Core
 {
+    /// <summary>
+    /// Helper Method for Unsecuring a SecureString
+    /// </summary>
    public static class SecurityStringHelpers
     {
        

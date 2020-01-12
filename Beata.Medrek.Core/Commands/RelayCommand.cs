@@ -2,6 +2,10 @@
 using System.Windows.Input;
 namespace Beata.Medrek.Core
 {
+    /// <summary>
+    /// Implementation of the ICommand Interface for 
+    /// Commands to derive from
+    /// </summary>
     public class RelayCommand : ICommand
     {
         public event EventHandler CanExecuteChanged = (sender, e) => { };

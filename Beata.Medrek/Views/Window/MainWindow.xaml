@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Beata.Medrek"
-        xmlns:core="clr-namespace:Beata.Medrek.Core;assembly=Beata.Medrek.Core"
+        xmlns:core="clr-namespace:Beata.Medrek;assembly=Beata.Medrek"
         mc:Ignorable="d"
         AllowsTransparency="False"
         WindowState="Maximized"
@@ -14,15 +14,15 @@
         Name="ShellWindow"
         Background="{StaticResource BackgroundBrush}"
         Title="Beata.Medrek"
-        Height="500"
-        Width="1000">
+        Height="700"
+        Width="900">
 
     <WindowChrome.WindowChrome>
         <WindowChrome 
             ResizeBorderThickness="6"
             CornerRadius="0"
             GlassFrameThickness="0"
-            CaptionHeight="42"
+            CaptionHeight="{Binding TitleHeightThickness,FallbackValue=30}"
          />
     </WindowChrome.WindowChrome>
 
@@ -36,108 +36,169 @@
                         <Border BorderThickness="0"
                                 BorderBrush="{StaticResource VeryLightBlueBrush}"
                             Background="{StaticResource BackgroundBrush}">
-
-                            <!--First Grid-->
                             <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="{Binding CaptionHeight,FallbackValue=42}"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
 
-                                <!--Caption Bar Items-->
+                                <!--First Grid-->
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="auto"/>
-                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding TitleHeightThickness,FallbackValue=30}"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
 
-                                    <!--Icon Button-->
-                                    <Button Command="{Binding ShowMenuCommand}"
+                                    <!--Caption Bar Items-->
+                                    <Grid>
+                                        <!--Icon Button-->
+                                        <Button
+                                        HorizontalAlignment="Left"
+                                        Command="{Binding ShowMenuCommand}"
                                         Style="{StaticResource IconButton}" 
                                         />
+                                        <!--Title Text-->
+                                        <TextBlock VerticalAlignment="Center"
+                                                    Text="MedRek"
+                                                   HorizontalAlignment="Center"
+                                                   TextAlignment="Center"
+                                                   FontSize="{StaticResource Average}"
+                                              />
 
-                                    <!--Title Text-->
-                                    <TextBlock 
-                                               Grid.Column="1"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                               TextAlignment="Center"
-                                               FontSize="{StaticResource Average}"
-                                              >
-                                        <Run Text="MED"/><Run FontFamily="{StaticResource FontAwesome}" Text="{StaticResource MedBook}"/>
-                                    </TextBlock>
+                                        <!--Time Text-->
+                                        <TextBlock VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"
+                                                   TextAlignment="Left"
+                                                   Margin="0 0 160 0"
+                                                   FontFamily="{StaticResource Terminax}"
+                                                   FontSize="14"
+                                                   Text="{Binding SystemTime,FallbackValue=12:32:34 pm}"/>
+                                        <!--Window Buttons-->
+                                        <Grid HorizontalAlignment="Right"
+                                          Width="150"  
+                                          >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                    <!--Window Buttons-->
-                                    <StackPanel Grid.Column="2"
-                                                Orientation="Horizontal">
-                                       
-                                        <!--Minimize Button-->
-                                        <Button Command="{Binding MinimizeCommand}"
+
+                                            <!--Minimize Button-->
+                                            <Button Command="{Binding MinimizeCommand}"
+                                                Grid.Column="0"
+                                                Content="&#xf2d1;"
                                                 Style="{StaticResource WindowMinimize}"                 
-                                                Content="{Binding WindowMinimizeImage}"/>
+                                                />
 
-                                        <!--Maximize Button-->
-                                        <Button local:WindowAttachedProperties.WindowMaximized="{Binding WindowIsMaximized}"
+                                            <!--Maximize Button-->
+                                            <Button local:WindowAttachedProperties.WindowMaximized="{Binding WindowIsMaximized}"
+                                                Grid.Column="1"
+                                                Content="{Binding IsMaximized,Converter={local:MaximizeButtonImageValueConverter}}"
                                                 Command="{Binding MaximizeCommand}"
                                                 Style="{StaticResource WindowMaximize}"
-                                                Content="{Binding WindowMaximizeImage}"/>
+                                              />
 
-                                        <!--Close Button-->
-                                        <Button Command="{Binding CloseCommand}"
+                                            <!--Close Button-->
+                                            <Button Command="{Binding CloseCommand}"
+                                                 Content="&#xf410;"
+                                                 Grid.Column="2"
                                                 Style="{StaticResource WindowClose}"
-                                                Content="{Binding WindowCloseImage}"/>
-                                    </StackPanel>
-                                </Grid>
+                                              />
+                                        </Grid>
+                                    </Grid>
 
-                                <!--Main Window Content-->
-                                <Border
-                                    Grid.Row="1">
-                                    <ContentPresenter>
-                                        <ContentPresenter.Content>
-                                            <Border VerticalAlignment="Center"
-                                                    HorizontalAlignment="Center">
-                                                <Frame Content="{Binding ApplicationViewModel.CurrentPage, Source={x:Static core:ViewModelLocator.Instance},
-                                                                         Converter={local:ApplicationPageValueConverter}}"/>
-                                            </Border>
-                                        </ContentPresenter.Content>
-                                    </ContentPresenter>
-                                </Border>
-
-                                <Border Grid.Row="2" 
-                                        >
+                                    <!--Main Window Content-->
+                                    <Frame x:Name="MainFrame"
+                                            local:ClearFrameHistory.Value="True"
+                                           NavigationUIVisibility="Hidden"
+                                           Grid.Row="1"  
+                                           DataContext="{x:Static core:ViewModelLocator.Instance}"
+                                           Content="{Binding ApplicationViewModel.CurrentPage,
+                                                              Converter={local:ApplicationPageValueConverter},
+                                                              ConverterParameter=CurrentPageViewModel}"/>
+                                    
                                     <!--Bottom Menu-->
-                                    <Grid >
+                                    <Grid Grid.Row="2">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
-
                                         <!--Interpreter Label-->
                                         <Label Grid.Column="0"
                                                VerticalAlignment="Bottom"
                                                Content="Ready!"/>
 
-                                        <!--Bottom Menu Items-->
-                                        <StackPanel VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                                Grid.Column="1" 
-                                                Orientation="Horizontal">
-                                            <Button Style="{StaticResource BottomMenu}" Content="&#xf095;"/>
-                                            <Button Style="{StaticResource BottomMenu}" Content="&#xf0e0;"/>
-                                            <Button Style="{StaticResource BottomMenu}" Content="&#xf013;"/>
-                                            <Button Style="{StaticResource BottomMenu}" Content="Beata" Padding="60 10"/>
-                                        </StackPanel>
-
                                         <!--Version Text-->
                                         <Label  VerticalAlignment="Bottom"
                                                 Grid.Column="2"
-                                                Content="V1.0.0"/>
+                                                Content="v1.0"/>
                                     </Grid>
-                                </Border>
-                             
+                                </Grid>
+
+                                <!--Menu Buttons-->
+                                <Grid VerticalAlignment="Bottom"
+                                      x:Name="menu"
+                                      HorizontalAlignment="Center"
+                                      MouseEnter="menu_MouseEnter"
+                                      MouseLeave="menu_MouseLeave">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.Effect>
+                                        <DropShadowEffect Opacity="0.2" BlurRadius="0"/>
+                                    </Grid.Effect>
+                                 
+                              
+
+                                <!--Display Menu Buttons trigger-->
+                                    <Border Background="{StaticResource LightBlueBrush}"
+                                             Grid.Row="0"
+                                             CornerRadius="5"
+                                             Padding="50 0"
+                                             BorderThickness="0"
+                                             BorderBrush="Transparent"
+                                             Width="{Binding ActualWidth,ElementName=menuButtons}"
+                                             Opacity="{Binding MenuButtonsVisible,Converter={local:BooleanToOpacityConverter},ConverterParameter=0.3}" 
+                                            >
+                                      
+
+                                        <Grid>
+                                            <!--Double Arrow Up Icon-->
+                                            <TextBlock  x:Name="arrowup"
+                                                    Text="{StaticResource DoubleArrowUP}"
+                                                    HorizontalAlignment="Center"
+                                                    FontFamily="{StaticResource FontAwesome2}"
+                                                    FontSize="{StaticResource Average}"
+                                                        Visibility="{Binding MenuButtonsVisible,Converter={local:BooleanToVisibilityValueConverter}}"    
+                                                  />
+
+                                            <!--Double Arrow Down Icon-->
+                                            <TextBlock  x:Name="arrowdown"
+                                                    Text="{StaticResource DoubleArrowDown}"
+                                                    HorizontalAlignment="Center"
+                                                    FontFamily="{StaticResource FontAwesome2}"
+                                                    FontSize="{StaticResource Average}"
+                                                    Visibility="{Binding MenuButtonsVisible,Converter={local:BooleanToVisibilityValueConverter},ConverterParameter=true}"
+                                                        />
+                                        </Grid>
+                                    </Border>
+                                    
+                                    <!--Bottom Menu Items-->
+                                    <StackPanel x:Name="menuButtons"
+                                                 Grid.Row="1"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"
+                                                Orientation="Horizontal"
+                                                 local:AnimateSlideInFromBottomProperty.Value="{Binding MenuButtonsVisible}">
+                                        <Button Style="{StaticResource BottomMenu}" Content="{StaticResource CogIcon}"/>
+                                        <Button Style="{StaticResource BottomMenu}" Content="{StaticResource EnvelopeIcon}"/>
+                                        <Button Style="{StaticResource BottomMenu}" Content="&#xf0c0;"/>
+                                        <Button Style="{StaticResource BottomMenu}" Content="Beata" Padding="60 10"/>
+
+
+                                    </StackPanel>
+                                </Grid>
                             </Grid>
                         </Border>
                     </ControlTemplate>

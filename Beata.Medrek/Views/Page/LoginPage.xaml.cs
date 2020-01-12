@@ -1,32 +1,34 @@
-﻿using Beata.Medrek.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Beata.Medrek
 {
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class LoginPage : BasePage<LoginPageViewModel>
+    public partial class LoginPage : BasePage,IHavePassword
     {
-        public LoginPage()
+
+        /// <summary>
+        /// Default Constructor 
+        /// </summary>
+        public LoginPage():base(new LoginPageViewModel())
         {
            InitializeComponent();
         }
 
+        /// <summary>
+        /// Constructor with Specific ViewModel
+        /// </summary>
+        /// <param name="dataContext"></param>
+        public LoginPage(BaseViewModel dataContext):base(dataContext)
+        {
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// Secure string from the PasswordBox
+        /// </summary>
         public SecureString securePassword
         {
             get
@@ -34,6 +36,7 @@ namespace Beata.Medrek
                 return passwordText.SecurePassword;
             }
         }
-        }
-    }
+}
+
+}
 

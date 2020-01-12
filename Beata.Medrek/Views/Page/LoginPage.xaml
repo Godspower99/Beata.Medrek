@@ -1,16 +1,16 @@
-﻿<local:BasePage x:TypeArguments="core:LoginPageViewModel" x:Class="Beata.Medrek.LoginPage"
+﻿<local:BasePage  x:Class="Beata.Medrek.LoginPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Beata.Medrek"
-      xmlns:core="clr-namespace:Beata.Medrek.Core;assembly=Beata.Medrek.Core"
+      xmlns:core="clr-namespace:Beata.Medrek;assembly=Beata.Medrek"
       mc:Ignorable="d" 
       Height="500"
       Width="500"
       x:Name="page"
-      d:DesignHeight="400" d:DesignWidth="400"
-      Title="LoginPage">
+      Title="LoginPage"
+     >
     
     <!--Outer Border For Page-->
     <Border Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -35,7 +35,7 @@
                                     Text="AUTHENTICATION REQUIRED "/>
                             
                         <!--Operative ID-->
-                        <TextBox Text="{Binding ID}"
+                        <TextBox Text="{Binding UserName,Mode=TwoWay}"
                                  Tag="OPERATIVE ID" 
                                  Margin="0 5"
                                  Style="{StaticResource OperativeID}"/>
@@ -48,6 +48,7 @@
 
                         <!--Login Button-->
                         <Button local:IsBusyAttachedProperty.IsBusy="{Binding IsLogInRunning}"
+                                Content="LOGIN"
                                 Command="{Binding LogInCommand}"
                                 CommandParameter="{Binding ElementName=page}"         
                                 Margin="120 15 120 10"

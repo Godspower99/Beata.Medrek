@@ -14,8 +14,6 @@
         <Setter Property="FontSize" Value="{StaticResource Regular}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundMainBrush}"/>
     </Style>
-
-
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}" x:Key="TextBoxBaseStyle"/>
 
 
@@ -139,11 +137,10 @@
                             </TextBlock>
 
                             <TextBlock HorizontalAlignment="Left"
-                                       FontFamily="{StaticResource FontAwesome}"
+                                       FontFamily="{StaticResource FontAwesome2}"
                                        Foreground="{StaticResource LightBlueBrush}"
                                        Background="{StaticResource BackgroundBrush}"
                                        Margin="7 7 0 0"
-                                        
                                        Text="&#xf084;"
                                        />
                         </Grid>
@@ -159,7 +156,6 @@
         </Setter>
     </Style>
 
-    
     <!--Spinning Text-->
     <Style TargetType="{x:Type TextBlock}" x:Key="SpinText">
         <Setter Property="Text" Value="&#xf110;"/>
@@ -189,4 +185,42 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+    
+    
+    
+    <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+       
+    </Style>
+
+    <!--Default TextBox-->
+    <Style TargetType="{x:Type TextBox}" x:Key="DefaultTextBox">
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="{StaticResource LatoRegular}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border"
+                            Padding="{TemplateBinding Padding}"
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}" >
+
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Focusable="false"
+                                      VerticalAlignment="Center"
+                                      HorizontalScrollBarVisibility="Hidden" 
+                                      VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 </ResourceDictionary>

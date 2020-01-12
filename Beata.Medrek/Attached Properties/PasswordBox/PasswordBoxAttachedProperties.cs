@@ -4,6 +4,11 @@ using System.Windows.Controls;
 
 namespace Beata.Medrek
 {
+    /// <summary>
+    /// PasswordBox Attached properties to 
+    /// monitor password changed event
+    /// and flag HasText 
+    /// </summary>
    public class PasswordBoxAttachedProperties
     {
 
