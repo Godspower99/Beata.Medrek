@@ -20,21 +20,20 @@ namespace Beata.Medrek
         /// Patient Country of Origin
         /// </summary>
         [Required]
-        [MaxLength(25)]
+        [MaxLength(30)]
         public string Country { get; set; }
 
         /// <summary>
         /// Patient State Of Birth
         /// </summary>
         [Required]
-        [MaxLength(25)]
+        [MaxLength(30)]
         public string State { get; set; }
 
         /// <summary>
         /// Patient City Of Origin
         /// </summary>
-        [Required]
-        [MaxLength(25)]
+        [MaxLength(30)]
         public string City { get; set; }
 
         /// <summary>

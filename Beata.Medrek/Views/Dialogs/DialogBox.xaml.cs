@@ -17,6 +17,7 @@ namespace Beata.Medrek
             InitializeComponent();
             this.DataContext = new ShellWindowViewModel(this);
             this.Content =(Content as UserControl);
+            
         }
     }
 }

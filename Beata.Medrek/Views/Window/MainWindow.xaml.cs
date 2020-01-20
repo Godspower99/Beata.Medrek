@@ -18,6 +18,9 @@ namespace Beata.Medrek
             this.DataContext = new ShellWindowViewModel(this);
         }
 
+        
+       
+        #region Event Handlers
         private void menu_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var grid = (sender as Grid);
@@ -28,5 +31,7 @@ namespace Beata.Medrek
         {
             ((ShellWindowViewModel)this.DataContext).MenuButtonsVisible = false;
         }
+
+        #endregion
     }
 }

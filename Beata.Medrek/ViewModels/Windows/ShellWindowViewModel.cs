@@ -49,6 +49,7 @@ namespace Beata.Medrek
             MinimizeCommand = new RelayCommand(Minimize);
             MaximizeCommand = new RelayCommand(Maximize);
             ShowMenuButtonsCommand = new RelayCommand(ShowMenuButtons);
+            ToggleStaffDetailsCommand = new RelayCommand(ToggleStaffDetails);
                 
      }
 
@@ -120,6 +121,10 @@ namespace Beata.Medrek
         /// </summary>
         public bool MenuButtonsVisible { get; set; }
 
+        public bool ShowStaffDetails { get; set; } = true;
+
+        public bool ShowNavigationMenu { get; set; }
+
         /// <summary>
         /// System Current Time
         /// </summary>
@@ -153,6 +158,8 @@ namespace Beata.Medrek
         /// Toggle the Visibility of the Menu Buttons
         /// </summary>
         public ICommand ShowMenuButtonsCommand { get; set; }
+
+        public ICommand ToggleStaffDetailsCommand { get; set; }
         #endregion
 
         #region Command Methods
@@ -162,6 +169,20 @@ namespace Beata.Medrek
         /// </summary>
         private void Close()
         {
+            if (DI.ApplicationViewModel.NumberOfUnfinishedRegistrationDialog > 0)
+            {
+                var result = DI.UiManager
+                    .ShowWarningDialog(new WarningDialogViewModel
+                    {
+                        Message = "Close All Unfinished Registrations?",
+                        WarningMode=WarningMode.Red
+                    });
+
+                if (result == DialogBoxResult.No)
+                    return;
+            }
+
+            DI.ApplicationViewModel.ClearAllUnfinishedRegistration();
             _window.Close();
         }
 
@@ -210,6 +231,11 @@ namespace Beata.Medrek
         private void ShowMenuButtons()
         {
             MenuButtonsVisible ^= true;
+        }
+
+        private void ToggleStaffDetails()
+        {
+            ShowStaffDetails ^= true;
         }
         #endregion
 

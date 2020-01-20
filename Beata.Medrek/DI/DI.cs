@@ -42,5 +42,6 @@ namespace Beata.Medrek
         /// Application DbContext Option
         /// </summary
         public static DbContextOptions<ApplicationDbContext> DbOptions => App.dbContextOption.Options;
+
     }
 }

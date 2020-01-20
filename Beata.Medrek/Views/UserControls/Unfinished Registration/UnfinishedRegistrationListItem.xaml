@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="Beata.Medrek.UnfinishedRegistrationListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Beata.Medrek"
+             mc:Ignorable="d" 
+             Height="70"
+             Width="400"
+            >
+
+    <Border x:Name="border"
+            BorderThickness="2"
+            BorderBrush="Black"
+            Background="SteelBlue"
+            CornerRadius="15"
+            >
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Background.Color"
+                                        To="ForestGreen"
+                                        Duration="0:0:.2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Background.Color"
+                                        To="SteelBlue"
+                                        Duration="0:0:.2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+        
+        <Grid Background="Transparent">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--image-->
+            <Border Grid.Column="0" 
+               >
+                <TextBlock VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Text="No Image"
+                            FontSize="13"
+                           Foreground="White"
+                            FontWeight="SemiBold"/>
+            </Border>
+
+            <!--Name-->
+            <TextBlock Text="{Binding Patient.FirstName}"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="13"
+                       Foreground="White"
+                       TextWrapping="Wrap"
+                        FontWeight="SemiBold"
+                   />
+
+            <!--Time-->
+            <TextBlock Text="{Binding Time}"
+                        Grid.Column="2"
+                        Foreground="White"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontSize="13"
+                        FontWeight="SemiBold"
+                   />
+
+            <!--Button-->
+            <Button Grid.Column="3" 
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Right"
+                     Style="{StaticResource CloseButton}"
+                     FontFamily="{StaticResource Terminax}"
+                     Padding="0"
+                     Width="35"
+                     Height="30"
+                     Margin="0 0 5 0"
+                     Content="X"
+                     Command="{Binding RemoveItemCommand}"/>
+        </Grid>
+    </Border>
+</UserControl>

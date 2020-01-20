@@ -1,6 +1,7 @@
 ﻿using System;
 
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Beata.Medrek
 {
@@ -9,10 +10,34 @@ namespace Beata.Medrek
     ///<Summary>
     public class UIManager : IUIManager
     {
-        public void ShowDialog(string Content)
+        /// <summary>
+        /// Warning DialogBox results used for tracking 
+        /// dialog box user response
+        /// </summary>
+        public DialogBoxResult DialogBoxResult { get; set; }
+
+        public DialogBoxResult ShowAddNewPatientOptionDialog()
         {
-            if (Content == nameof(RegisterPatientUserControl))
-                new DialogBox(new RegisterPatientUserControl()).ShowDialog();
+            DI.ApplicationViewModel.DialogActive = true;
+            new AddNewPatientOption().ShowDialog();
+            DI.ApplicationViewModel.DialogActive = false;
+            return DialogBoxResult;
+        }
+
+        public void ShowDialog(object obj)
+        {
+          if(obj is UserControl)
+            {
+                new DialogBox(obj).ShowDialog();
+            }
+        }
+
+        public DialogBoxResult ShowWarningDialog(WarningDialogViewModel warningModel)
+        {
+            DI.ApplicationViewModel.DialogActive = true;
+            new WarningDialog(warningModel).ShowDialog();
+            DI.ApplicationViewModel.DialogActive = false;
+            return DialogBoxResult;
         }
     }
 }

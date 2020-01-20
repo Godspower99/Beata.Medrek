@@ -6,7 +6,7 @@ namespace Beata.Medrek
     /// <summary>
     /// Interaction logic for MainMenuPage.xaml
     /// </summary>
-    public partial class MainMenuPage : BasePage
+    public partial class MainMenuPage : BasePage<MainMenuPageViewModel>
     {
         #region Constructors
 
@@ -18,11 +18,7 @@ namespace Beata.Medrek
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Constructor with Specific ViewModel
-        /// </summary>
-        /// <param name="specificViewModel"></param>
-        public MainMenuPage(BaseViewModel specificViewModel) : base(specificViewModel)
+        public MainMenuPage(MainMenuPageViewModel SpecificViewModel):base(SpecificViewModel)
         {
             InitializeComponent();
         }

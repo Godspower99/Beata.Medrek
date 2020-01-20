@@ -7,8 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beata.Medrek", "Beata.Medre
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0389B4BE-E01D-4E58-9B3E-59C43D120F4D}"
 	ProjectSection(SolutionItems) = preProject
-		Beata.Medrek\Value Converters\ApplicationPageDataContextConverter.cs = Beata.Medrek\Value Converters\ApplicationPageDataContextConverter.cs
-		..\..\Visual Studio 2015\Projects\Fasseto\Fasseto\Views\Frame\PageHost.xaml.cs = ..\..\Visual Studio 2015\Projects\Fasseto\Fasseto\Views\Frame\PageHost.xaml.cs
+		Beata.Medrek\Design ViewModel [Delete Later]\AddPatientDesignModel.cs = Beata.Medrek\Design ViewModel [Delete Later]\AddPatientDesignModel.cs
+		..\..\..\Desktop\Fasseto Resources\fasetto-word-develop\Source\Fasetto.Word\Controls\Chat\ChatList\ChatListControl.xaml = ..\..\..\Desktop\Fasseto Resources\fasetto-word-develop\Source\Fasetto.Word\Controls\Chat\ChatList\ChatListControl.xaml
 	EndProjectSection
 EndProject
 Global

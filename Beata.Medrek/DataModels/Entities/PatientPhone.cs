@@ -35,7 +35,7 @@ namespace Beata.Medrek
         /// Note:Nullable
         /// </summary>
         [MaxLength(100)]
-        public string emailAddress { get; set; }
+        public string EmailAddress { get; set; }
         #endregion
 
         #region Relationship EndPoints

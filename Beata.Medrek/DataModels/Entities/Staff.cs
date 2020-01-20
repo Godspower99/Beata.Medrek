@@ -40,7 +40,7 @@ namespace Beata.Medrek
         /// Note:NUllable
         /// </summary>
         [MaxLength(25)]
-        public string Middle { get; set; }
+        public string MiddleName { get; set; }
 
         /// <summary>
         /// Staff Last Name

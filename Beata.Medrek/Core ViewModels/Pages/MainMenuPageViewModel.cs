@@ -29,7 +29,7 @@ namespace Beata.Medrek
         /// <summary>
         /// Staff FullName
         /// </summary>
-        public string StaffName => $"{staff.LastName} {staff.FirstName} {staff.Middle}";
+        public string StaffName => $"{staff.LastName} {staff.FirstName} {staff.MiddleName}";
 
         /// <summary>
         /// Staff UserName
@@ -45,7 +45,6 @@ namespace Beata.Medrek
         /// Staff Login Time
         /// </summary>
         public string StaffLoginTime => DateTime.Now.ToLongTimeString();
-
 
         #endregion
 
@@ -81,17 +80,23 @@ namespace Beata.Medrek
                 dbContext.StaffLogout();
 
                 // Go Back to Login Page
-                DI.ApplicationViewModel.GotoPage(ApplicationPage.Login);
+              //  DI.ApplicationViewModel.GotoPage(ApplicationPage.Login);
             }
 
         }
+       
 
         /// <summary>
         /// Opens Dialog Box to register a new Patient
         /// </summary>
         private void Register()
         {
-            DI.UiManager.ShowDialog("RegisterPatientUserControl");
+            var result = DI.UiManager.ShowAddNewPatientOptionDialog();
+
+            if(result==DialogBoxResult.No)
+            new AddNewPatientDialog().ShowDialog();
+
+            // TODO :: Talk to Server to retrieve patient Information
         }
         #endregion
     }

@@ -21,6 +21,7 @@ namespace Beata.Medrek
             {
                 dbContext.Patients.Add(patient);
                 dbContext.SaveChanges();
+                return true;
             }
             catch(Exception e)
             {
@@ -136,24 +137,6 @@ namespace Beata.Medrek
             try
             {
                 dbContext.PatientFamilyContacts.Add(familyContact);
-                dbContext.SaveChanges();
-                return true;
-            }
-
-            catch (Exception e) { throw (e); }
-        }
-
-        /// <summary>
-        /// Add Patient Address DbContext Extension
-        /// </summary>
-        /// <param name="dbContext"></param>
-        /// <param name="Notes"></param>
-        /// <returns><see cref="bool"/></returns>
-        public static bool AddPatientAddress(this ApplicationDbContext dbContext, PatientAddress address)
-        {
-            try
-            {
-                dbContext.PatientsAddresses.Add(address);
                 dbContext.SaveChanges();
                 return true;
             }

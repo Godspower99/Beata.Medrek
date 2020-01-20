@@ -17,7 +17,6 @@
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}" x:Key="TextBoxBaseStyle"/>
 
 
-    
     <!--Login Page Header Text-->
     <Style TargetType="{x:Type TextBlock}" x:Key="HeaderText" BasedOn="{StaticResource TextBlockBaseStyle}">
         <Setter Property="TextAlignment" Value="Center"/>
@@ -59,6 +58,8 @@
                                        FontFamily="{StaticResource LatoBold}"
                                        TextAlignment="Center"
                                        Margin="{TemplateBinding Padding}"
+                                        Focusable="True"
+                                        FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
                                       />
 
                             <TextBlock x:Name="placeholder" 
@@ -186,8 +187,7 @@
         </Style.Triggers>
     </Style>
     
-    
-    
+
     <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
        
     </Style>
@@ -222,5 +222,81 @@
         </Setter>
     </Style>
 
+    <!--Add Patient Form TextBox-->
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxBaseStyle}" x:Key="AddPatient">
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Terminax}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundMainBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ForegroundMainBrush}"/>
+        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Margin" Value="5 0 50 0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="5"
+                            Padding="{TemplateBinding Padding}"
+                            Margin="{TemplateBinding Margin}"
+                            >
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="0" Opacity=".1"/>
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
+                            <TextBox  x:Name="MainText"             
+                                         Grid.Column="1"
+                                        Background="{StaticResource BackgroundBrush}"
+                                       Foreground="{StaticResource ForegroundMainBrush}"
+                                       FontSize="18"
+                                       Text="{Binding RelativeSource={RelativeSource TemplatedParent},Mode=OneWayToSource,Path=Text,UpdateSourceTrigger=PropertyChanged}"
+                                       FontFamily="{StaticResource LatoBold}"
+                                       BorderThickness="0"
+                                       TextAlignment="Left"
+                                      Focusable="True"
+                                      IsTabStop="True"
+                                      />
+
+                            <TextBlock x:Name="placeholder" 
+                                         Grid.Column="1"
+                                       IsHitTestVisible="False"
+                                       Background="Transparent"
+                                       Foreground="{StaticResource ForegroundDarkBrush}"
+                                       FontFamily="{StaticResource LatoThin}"
+                                       Visibility="Collapsed"
+                                       Text="{TemplateBinding Tag}"
+                                       TextAlignment="Left"
+                                       FontSize="18"
+                                       >
+                            </TextBlock>
+
+                            <TextBlock HorizontalAlignment="Left"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Center"
+                                       FontFamily="{StaticResource Terminax}"
+                                       Foreground="{StaticResource LightBlueBrush}"
+                                       FontSize="18"
+                                       Margin="{TemplateBinding Margin}"             
+                                       Text="{TemplateBinding Name,Converter={local:AddTextConverter},ConverterParameter=:}"
+                                       />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Text,ElementName=MainText}" Value="">
+                            <Setter Property="Visibility" TargetName="placeholder" Value="Visible"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

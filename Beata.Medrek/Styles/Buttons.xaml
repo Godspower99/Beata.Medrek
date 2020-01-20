@@ -12,15 +12,19 @@
     <Style TargetType="{x:Type Button}" x:Key="IconButton">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Content" Value="{StaticResource IconText}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}"
-                            Padding="10">
-                        <Viewbox>
-                            <TextBlock FontFamily="{StaticResource FontAwesome2}"
-                                Text="{StaticResource IconText}"/>
-                        </Viewbox>
+                            Padding="{TemplateBinding Padding}">
+                        <TextBlock FontFamily="{StaticResource FontAwesome2}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   Text="{TemplateBinding Content}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -276,10 +280,11 @@
 
     <!--Main Menu Button Style-->
     <Style TargetType="{x:Type Button}" x:Key="MainMenuButton">
-        <Setter Property="Padding" Value="20 50"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
+                    
                     <Border Padding="{TemplateBinding Padding}" 
                             >
                         <Grid>
@@ -287,17 +292,17 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="0.2*"/>
                             </Grid.RowDefinitions>
-                            
+
                             <!--Icon Display Box-->
                             <Border x:Name="iconBox"
-                                CornerRadius="7"
-                                Background="{StaticResource VeryLightBlueBrush}"
+                                    CornerRadius="7"
+                                    Background="AliceBlue"
                                     >
                                 <Border.Effect>
                                     <DropShadowEffect BlurRadius="0"
                                                    Opacity="0.1"/>
                                 </Border.Effect>
-                                
+
                                 <Border.Triggers>
                                     <EventTrigger RoutedEvent="MouseEnter">
                                         <BeginStoryboard>
@@ -320,7 +325,7 @@
                                             <Storyboard Storyboard.TargetName="textBox" Storyboard.TargetProperty="Opacity">
                                                 <DoubleAnimation To="0"
                                                                  Duration="0:0:.3"/>
-                                                <ColorAnimation To="{StaticResource VeryLightBlue}" Storyboard.TargetName="iconBox" 
+                                                <ColorAnimation To="AliceBlue" Storyboard.TargetName="iconBox" 
                                                                  Storyboard.TargetProperty="Background.Color"
                                                                  Duration="0:0:.3"/>
                                                 <ColorAnimation To="{StaticResource ForegroundDark}" Storyboard.TargetName="iconText" 
@@ -331,18 +336,16 @@
                                     </EventTrigger>
                                 </Border.Triggers>
 
-                                <Viewbox>
                                     <!--Button Icon-->
                                     <Label x:Name="iconText" 
-                                        Content="{TemplateBinding Content}"
-                                       Foreground="{StaticResource ForegroundDarkBrush}"
-                                       VerticalAlignment="Center"
-                                       VerticalContentAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       FontSize="130"
-                                       FontFamily="{StaticResource FontAwesome2}"/>
+                                            Content="{TemplateBinding Content}"
+                                            Foreground="{StaticResource ForegroundDarkBrush}"
+                                           VerticalAlignment="Center"
+                                           VerticalContentAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           FontSize="100"
+                                          FontFamily="{StaticResource FontAwesome2}"/>
 
-                                </Viewbox>    
                             </Border>
 
                             <!--Text Display Box-->
@@ -356,13 +359,323 @@
                                    HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
-                        
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--Navigtion Side Menu Button-->
+    <Style TargetType="{x:Type Button}" x:Key="NavigationButton">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesome2}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderThickness="0"
+                            Width="70"
+                            Height="70"
+                            Background="Transparent"
+                            >
+                        <TextBlock x:Name="MenuSwitch"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    TextAlignment="Center"
+                                    FontFamily="{TemplateBinding FontFamily}"
+                                    Text="{TemplateBinding Content}"
+                                    FontSize="40" 
+                                    Foreground="{TemplateBinding Foreground}"/>
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard Storyboard.TargetName="MenuSwitch"
+                                                >
+                                        <ColorAnimation To="DarkBlue" 
+                                                    Storyboard.TargetProperty="Foreground.Color"
+                                                    Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard Storyboard.TargetName="MenuSwitch"
+                                                >
+                                        <ColorAnimation To="White" 
+                                                    Storyboard.TargetProperty="Foreground.Color"
+                                                    Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Navigtion Side Menu Switch Button-->
+    <Style TargetType="{x:Type Button}" x:Key="NavigationSwitchButton">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesome2}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderThickness="0"
+                            Width="70"
+                            Height="70"
+                            Background="Transparent"
+                            >
+                        <TextBlock x:Name="MenuSwitch"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    TextAlignment="Center"
+                                    FontFamily="{TemplateBinding FontFamily}"
+                                    Text="{TemplateBinding Content}"
+                                    FontSize="40" 
+                                    Foreground="{TemplateBinding Foreground}"/>
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard Storyboard.TargetName="MenuSwitch"
+                                                >
+                                        <ColorAnimation To="Gray" 
+                                                    Storyboard.TargetProperty="Foreground.Color"
+                                                    Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard Storyboard.TargetName="MenuSwitch"
+                                                >
+                                        <ColorAnimation To="White" 
+                                                    Storyboard.TargetProperty="Foreground.Color"
+                                                    Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--TabItem Style-->
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Border x:Name="border" 
+                            BorderThickness="1"
+                            BorderBrush="Gray"
+                            CornerRadius="20 20 0 0"
+                            Padding="10"
+                           Background="LightGray"
+                                              >
+                        <TextBlock x:Name="text"
+                              TextAlignment="Center"
+                               Text="{TemplateBinding Header}"
+                              FontFamily="{StaticResource Terminax}"
+                              Foreground="Black"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="border" 
+                                    Property="Background"
+                                   Value="Blue"/>
+                            <Setter TargetName="text" 
+                                    Property="Foreground"
+                                     Value="White"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
+    <!--Close Button-->
+    <Style  TargetType="{x:Type Button}" x:Key="CloseButton">
+        <Setter Property="Background" Value="Red"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundMainBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="{StaticResource Regular}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 10"/>
+        <Setter Property="Margin"  Value="0"/>
+        <Setter Property="local:IsBusyAttachedProperty.IsBusy" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="7"
+                            Padding="{TemplateBinding Padding}"
+                            >
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="0" Opacity="0.3"/>
+                        </Border.Effect>
+                        <Grid>
+                            <Label x:Name="loginText"
+                                   FontFamily="{StaticResource Consolas}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                    Visibility="{TemplateBinding local:IsBusyAttachedProperty.IsBusy,Converter={local:BooleanToVisibilityValueConverter}}"
+                                   Content="{TemplateBinding Content}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   Margin="{TemplateBinding Padding}" 
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <TextBlock x:Name="IsBusyText"
+                                       Style="{StaticResource SpinText}"
+                                   FontFamily="{StaticResource FontAwesome2}"
+                                   FontSize="{StaticResource Average}"
+                                   Visibility="{TemplateBinding local:IsBusyAttachedProperty.IsBusy,Converter={local:BooleanToVisibilityValueConverter},ConverterParameter=true}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   Margin="{TemplateBinding Padding}" 
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   >
+                                <TextBlock.RenderTransform>
+                                    <RotateTransform/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="border" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Opacity="0" BlurRadius="0"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="FontSize" TargetName="loginText" Value="16"/>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="border"
+                                                    Storyboard.TargetProperty="Background.Color"
+                                                    To="DarkRed"
+                                                    Duration="0:0:.25"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="border"
+                                                    Storyboard.TargetProperty="Background.Color"
+                                                    To="Red"
+                                                    Duration="0:0:.25"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        </Style.Triggers>
+    </Style>
+
+    <!--Ok Button-->
+    <Style  TargetType="{x:Type Button}" x:Key="OkButton">
+        <Setter Property="Background" Value="Green"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundMainBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="{StaticResource Regular}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 10"/>
+        <Setter Property="Margin"  Value="0"/>
+        <Setter Property="local:IsBusyAttachedProperty.IsBusy" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="7"
+                            Padding="{TemplateBinding Padding}"
+                            >
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="0" Opacity="0.3"/>
+                        </Border.Effect>
+                        <Grid>
+                            <Label x:Name="loginText"
+                                   FontFamily="{StaticResource Consolas}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                    Visibility="{TemplateBinding local:IsBusyAttachedProperty.IsBusy,Converter={local:BooleanToVisibilityValueConverter}}"
+                                   Content="{TemplateBinding Content}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   Margin="{TemplateBinding Padding}" 
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <TextBlock x:Name="IsBusyText"
+                                       Style="{StaticResource SpinText}"
+                                   FontFamily="{StaticResource FontAwesome2}"
+                                   FontSize="{StaticResource Average}"
+                                   Visibility="{TemplateBinding local:IsBusyAttachedProperty.IsBusy,Converter={local:BooleanToVisibilityValueConverter},ConverterParameter=true}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   Margin="{TemplateBinding Padding}" 
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   >
+                                <TextBlock.RenderTransform>
+                                    <RotateTransform/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="border" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Opacity="0" BlurRadius="0"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="FontSize" TargetName="loginText" Value="16"/>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="border"
+                                                    Storyboard.TargetProperty="Background.Color"
+                                                    To="DarkGreen"
+                                                    Duration="0:0:.25"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="border"
+                                                    Storyboard.TargetProperty="Background.Color"
+                                                    To="Green"
+                                                    Duration="0:0:.25"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

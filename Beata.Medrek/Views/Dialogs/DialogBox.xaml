@@ -11,7 +11,8 @@
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
         Background="{StaticResource BackgroundBrush}"
-        Title="Beata.Medrek"
+        x:Name="MinimizableDialog"
+        Title="MinimizableDialog"
          >
 
     <WindowChrome.WindowChrome>
@@ -32,7 +33,7 @@
                         <Border BorderThickness="0"
                                 Padding="0"
                                 BorderBrush="DarkGray"
-                                Background="DarkGray"
+                                Background="{StaticResource LightBlueBrush}"
                                 CornerRadius="5">
                             <Grid>
 
@@ -55,13 +56,16 @@
                                         <Button
                                             Grid.Column="0"
                                             HorizontalAlignment="Left"
+                                            FontSize="25"
+                                            Padding="0"
+                                            Margin="10 0 0 0"
                                             Command="{Binding ShowMenuCommand}"
                                             Style="{StaticResource IconButton}" 
                                         />
                                         <!--Title Text-->
                                         <TextBlock VerticalAlignment="Center"
                                                    Grid.Column="1"
-                                                   Text="New Patient"
+                                                   Text="{Binding Title,FallbackValue=New User}"
                                                    HorizontalAlignment="Center"
                                                    TextAlignment="Center"
                                                    FontSize="{StaticResource Regular}"
@@ -80,19 +84,11 @@
 
                                             <!--Minimize Button-->
                                             <Button Command="{Binding MinimizeCommand}"
-                                                    Grid.Column="0"
-                                                    Content="&#xf2d1;"
-                                                    Style="{StaticResource WindowMinimize}"                 
+                                                    Visibility="{Binding CanMinimize}"
+                                                     Grid.Column="0"
+                                                     Content="&#xf2d1;"
+                                                     Style="{StaticResource WindowMinimize}"                 
                                                 />
-
-                                            <!--Maximize Button-->
-                                            <Button local:WindowAttachedProperties.WindowMaximized="{Binding WindowIsMaximized}"
-                                                    Grid.Column="1"
-                                                    Visibility="Collapsed"
-                                                    Content="{Binding IsMaximized,Converter={local:MaximizeButtonImageValueConverter}}"
-                                                    Command="{Binding MaximizeCommand}"
-                                                    Style="{StaticResource WindowMaximize}"
-                                              />
 
                                             <!--Close Button-->
                                             <Button Command="{Binding CloseCommand}"
@@ -118,5 +114,4 @@
             </Setter>
         </Style>
     </Window.Resources>
- 
 </Window>

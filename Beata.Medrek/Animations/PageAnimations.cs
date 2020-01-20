@@ -22,7 +22,7 @@ namespace Beata.Medrek
             var sb = new Storyboard();
 
             // Add slide from right animation
-            //sb.AddSlideFromRight(seconds, page.WindowWidth);
+            sb.AddSlideFromRight(seconds, page.WindowWidth);
 
             // Add fade in animation
             sb.AddFadeIn(seconds);
@@ -48,8 +48,8 @@ namespace Beata.Medrek
             // Create the storyboard
             var sb = new Storyboard();
 
-            // Add slide from right animation
-            //.AddSlideToLeft(seconds, page.WindowWidth);
+           // Add slide from right animation
+            sb.AddSlideToLeft(seconds, page.WindowWidth);
 
             // Add fade in animation
             sb.AddFadeOut(seconds);

@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Beata.Medrek.NavigationSideMenuControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Beata.Medrek"
+             Visibility="{Binding ApplicationViewModel.ShowNavigationControl,Converter={local:BooleanToVisibilityValueConverter},ConverterParameter=true}"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" Width="70">
+    <Border HorizontalAlignment="Center">
+        <StackPanel>
+            <!--Side menu Switch-->
+            <Button Style="{StaticResource NavigationSwitchButton}"
+                     Command="{Binding ApplicationViewModel.ToggleNavigationControlCommand}"
+                    Content="&#xf0c9;"/>
+            
+            <!--Main Menu Nav-->
+            <Button Style="{StaticResource NavigationButton}"
+                    Content="&#xf015;"/>
+
+            <!--Add New User-->
+            <Button Style="{StaticResource NavigationButton}"
+                    Content="{StaticResource UserPlus}"/>
+
+            <!--Search new User Nav-->
+            <Button Style="{StaticResource NavigationButton}"
+                    Content="{StaticResource SearchIcon}"/>
+
+            <!--Scheduler Nav-->
+            <Button Style="{StaticResource NavigationButton}"
+                    Content="&#xf02d;"/>
+
+            <!--Chat Nav-->
+            <Button Style="{StaticResource NavigationButton}"
+                    Content="&#xf086;"/>
+
+            <!--settings Nav-->
+            <Button Style="{StaticResource NavigationButton}"
+                    Content="{StaticResource Cogs}"/>
+
+            <!--Cloud Upload Nav-->
+            <Button Style="{StaticResource NavigationButton}"
+                    Content="{StaticResource CloudUpload}"/>
+        </StackPanel>
+    </Border>
+</UserControl>

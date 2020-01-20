@@ -23,28 +23,28 @@ namespace Beata.Medrek
         /// Patient First Name
         /// </summary>
         [Required]
-        [MaxLength(25)]
+        [MaxLength(30)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Patient Middle Name
         /// Note:Nullable
         /// </summary>
-        [MaxLength(25)]
+        [MaxLength(30)]
         public string MiddleName { get; set; }
 
         /// <summary>
         /// Patient Last Name
         /// </summary>
         [Required]
-        [MaxLength(25)]
+        [MaxLength(30)]
         public string LastName { get; set; }
 
         /// <summary>
         /// Patient Title if Available
         /// Note:Nullable
         /// </summary>
-        [MaxLength(10)]
+        [MaxLength(15)]
         public string Title { get; set; }
 
         /// <summary>
@@ -57,14 +57,14 @@ namespace Beata.Medrek
         /// Patient Gender
         /// </summary>
         [Required]
-        [MaxLength(10)]
+        [MaxLength(25)]
         public string Gender { get; set; }
 
         /// <summary>
         /// Patient Marital Status 
         /// Note:Nullable 
         /// </summary>
-        [MaxLength(25)]
+        [MaxLength(30)]
         public string MaritalStatus { get; set; }
 
         /// <summary>
@@ -78,6 +78,11 @@ namespace Beata.Medrek
         /// Note:Nullable
         /// </summary>
         public decimal Height { get; set; }
+
+        /// <summary>
+        /// The patient's Occupation
+        /// </summary>
+        public string Occupation { get; set; }
 
         /// <summary>
         /// Date and Time Of Patient Registration
@@ -97,12 +102,6 @@ namespace Beata.Medrek
         public List<FamilyContact> FamilyContacts { get; set; }
 
         /// <summary>
-        /// Patient Address
-        /// Note:Relationship properties Set Using Fluent API
-        /// </summary>
-        public PatientAddress Address { get; set; }
-
-        /// <summary>
         /// Patient Phone Contacts
         /// Note:Relationship properties Set using Fluent API
         /// </summary>
@@ -119,6 +118,12 @@ namespace Beata.Medrek
         /// Note:Relationship properties Set using Fluent API
         /// </summary>
         public PatientOriginOfBirth OriginOfBirth { get; set; }
+
+        /// <summary>
+        /// Patient Address
+        /// Note:Relationship Properties Set using fluent API
+        /// </summary>
+        public PatientAddress PatientAddress { get; set; }
 
         #endregion
     }

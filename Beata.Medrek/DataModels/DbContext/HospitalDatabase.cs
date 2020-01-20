@@ -9,12 +9,7 @@ using System.Text;
 namespace Beata.Medrek
 { 
   public class ApplicationDbContext:DbContext
-    {
-        #region Private Members
-
-        private DbContextOptionsBuilder _optionsBuilder;
-        #endregion
-
+    { 
         #region Public Properties And DbSet
         /// <summary>
         /// Registered Staffs Entity
@@ -32,15 +27,9 @@ namespace Beata.Medrek
         public DbSet<PatientsNotes> PatientsNotes { get; set; }
 
         /// <summary>
-        /// Registered Patients Address
-        /// </summary>
-        public DbSet<PatientAddress> PatientsAddresses { get; set; }
-
-        /// <summary>
         /// Registered Patient Phone
         /// </summary>
         public DbSet<PatientPhone> PatientPhones { get; set; }
-
 
         /// <summary>
         /// Registered Patients Origin Of Birth
@@ -87,11 +76,11 @@ namespace Beata.Medrek
                 .HasForeignKey(r => r.MedRekNO)
                 .HasPrincipalKey(pr => pr.MedRekNO);
 
-            // One-One Relationship Between Patient And PatientAddress
+            // One-One Relationship Between Patient and PatientAddress
             modelBuilder.Entity<PatientAddress>()
                 .HasOne(p => p.Patient)
-                .WithOne(p=>p.Address)
-                .HasForeignKey<PatientAddress>(p=>p.MedRekNO);
+                .WithOne(p => p.PatientAddress)
+                .HasForeignKey<PatientAddress>(p => p.MedRekNO);
 
             // One-One Relationship Between Patient And PatientOriginOfBirth
             modelBuilder.Entity<PatientOriginOfBirth>()
@@ -120,11 +109,6 @@ namespace Beata.Medrek
                 .HasPrincipalKey(pk => pk.UserName)
                 .OnDelete(DeleteBehavior.NoAction);
 
-        }
-
-        public ApplicationDbContext CreateDbContext(string[] args)
-        {
-            throw new NotImplementedException();
         }
         #endregion
         

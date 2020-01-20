@@ -6,6 +6,12 @@ namespace Beata.Medrek
     ///<Summary>
    public interface IUIManager
     {
-        void ShowDialog(string Content);
+        DialogBoxResult DialogBoxResult { get; set; }
+
+        void ShowDialog(object obj);
+
+        DialogBoxResult ShowWarningDialog(WarningDialogViewModel warningModel);
+
+        DialogBoxResult ShowAddNewPatientOptionDialog();
     }
 }

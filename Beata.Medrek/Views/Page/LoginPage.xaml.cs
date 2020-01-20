@@ -1,18 +1,19 @@
 ﻿
 using System.Security;
+using System.Windows.Controls;
 
 namespace Beata.Medrek
 {
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class LoginPage : BasePage,IHavePassword
+    public partial class LoginPage : BasePage<LoginPageViewModel>,IHavePassword
     {
 
         /// <summary>
         /// Default Constructor 
         /// </summary>
-        public LoginPage():base(new LoginPageViewModel())
+        public LoginPage()
         {
            InitializeComponent();
         }
@@ -21,7 +22,7 @@ namespace Beata.Medrek
         /// Constructor with Specific ViewModel
         /// </summary>
         /// <param name="dataContext"></param>
-        public LoginPage(BaseViewModel dataContext):base(dataContext)
+        public LoginPage(LoginPageViewModel SpecificViewModel):base(SpecificViewModel)
         {
             InitializeComponent();
         }
@@ -36,7 +37,7 @@ namespace Beata.Medrek
                 return passwordText.SecurePassword;
             }
         }
-}
+    }
 
 }
 

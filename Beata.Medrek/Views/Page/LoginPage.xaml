@@ -1,4 +1,4 @@
-﻿<local:BasePage  x:Class="Beata.Medrek.LoginPage"
+﻿<local:BasePage x:TypeArguments="local:LoginPageViewModel"  x:Class="Beata.Medrek.LoginPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,6 @@
       Height="500"
       Width="500"
       x:Name="page"
-      Title="LoginPage"
      >
     
     <!--Outer Border For Page-->
@@ -26,7 +25,9 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="0"  Opacity=".3" />
                     </Border.Effect>
-                    <StackPanel VerticalAlignment="Center">
+                    
+                    <StackPanel VerticalAlignment="Center"
+                                FocusManager.FocusedElement="{Binding ElementName=UsernameText}">
 
                         <!--Header Text-->
                         <TextBlock  Margin="10 0"
@@ -35,19 +36,21 @@
                                     Text="AUTHENTICATION REQUIRED "/>
                             
                         <!--Operative ID-->
-                        <TextBox Text="{Binding UserName,Mode=TwoWay}"
-                                 Tag="OPERATIVE ID" 
+                        <TextBox x:Name="UsernameText"
+                                  Text="{Binding UserName,Mode=TwoWay}"
+                                 Tag="Username"
                                  Margin="0 5"
                                  Style="{StaticResource OperativeID}"/>
 
                         <!--Access Code-->
                         <PasswordBox x:Name="passwordText"
-                                 Tag="ACCESS CODE"
+                                 Tag="Password"
                                  Margin="0 5"
                                  />
 
                         <!--Login Button-->
                         <Button local:IsBusyAttachedProperty.IsBusy="{Binding IsLogInRunning}"
+                                IsDefault="True"
                                 Content="LOGIN"
                                 Command="{Binding LogInCommand}"
                                 CommandParameter="{Binding ElementName=page}"         

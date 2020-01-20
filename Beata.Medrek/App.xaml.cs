@@ -56,7 +56,7 @@ namespace Beata.Medrek
 
         }
 
-       private void ConfigureService(IServiceCollection service)
+        private void ConfigureService(IServiceCollection service)
         {
             // Add IConfiguration 
             service.AddSingleton<IConfiguration>(Configuration);
@@ -64,8 +64,6 @@ namespace Beata.Medrek
             // Add DbContext to for dependency Injection
             service.AddDbContext<ApplicationDbContext>(option=>
             option.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection")));
-
-
 
             // Add Application Caching Mechanism for LoggedIn Staff
             service.AddSingleton<IApplicationCache<Staff>,StaffCache>();
@@ -76,5 +74,6 @@ namespace Beata.Medrek
             // Add Application UIManager
             service.AddSingleton<IUIManager, UIManager>();
         }
+
     }
 }

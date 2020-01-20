@@ -65,43 +65,46 @@ namespace Beata.Medrek.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Gender")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
 
                     b.Property<decimal>("Height")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("MaritalStatus")
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("Occupation")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RegistrationTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
 
                     b.Property<decimal>("Weight")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("MedRekNO");
 
-                    b.ToTable("Patient");
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("Beata.Medrek.PatientAddress", b =>
@@ -111,16 +114,20 @@ namespace Beata.Medrek.Migrations
 
                     b.Property<string>("PrimaryAddress")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
 
                     b.Property<string>("SecondaryAddress")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.HasKey("MedRekNO");
 
-                    b.ToTable("PatientsAddresses");
+                    b.ToTable("PatientAddress");
                 });
 
             modelBuilder.Entity("Beata.Medrek.PatientOriginOfBirth", b =>
@@ -129,14 +136,13 @@ namespace Beata.Medrek.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("LGA")
                         .HasColumnType("nvarchar(30)")
@@ -144,18 +150,22 @@ namespace Beata.Medrek.Migrations
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("MedRekNO");
 
-                    b.ToTable("PatientOriginOfBirths");
+                    b.ToTable("PatientOriginOfBirth");
                 });
 
             modelBuilder.Entity("Beata.Medrek.PatientPhone", b =>
                 {
                     b.Property<string>("MedRekNO")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("PrimaryPhone")
                         .IsRequired()
@@ -165,10 +175,6 @@ namespace Beata.Medrek.Migrations
                     b.Property<string>("SecondaryPhone")
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
-
-                    b.Property<string>("emailAddress")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
 
                     b.HasKey("MedRekNO");
 
@@ -234,7 +240,7 @@ namespace Beata.Medrek.Migrations
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
-                    b.Property<string>("Middle")
+                    b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
@@ -280,7 +286,7 @@ namespace Beata.Medrek.Migrations
             modelBuilder.Entity("Beata.Medrek.PatientAddress", b =>
                 {
                     b.HasOne("Beata.Medrek.Patient", "Patient")
-                        .WithOne("Address")
+                        .WithOne("PatientAddress")
                         .HasForeignKey("Beata.Medrek.PatientAddress", "MedRekNO")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

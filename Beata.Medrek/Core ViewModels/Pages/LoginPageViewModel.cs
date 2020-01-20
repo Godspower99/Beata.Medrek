@@ -1,22 +1,18 @@
-﻿using System.Linq;
-using System;
-using System.Security;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Collections.Generic;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Beata.Medrek
 {
     /// <summary>
     /// Login Page ViewModel/Datacontext
     /// </summary>
- public class LoginPageViewModel:BaseViewModel
+    public class LoginPageViewModel:BaseViewModel
     {
         #region Constructor
         public LoginPageViewModel()
         {
-            LogInCommand =new RelayParameterizedCommand((parameter)=> Login(parameter));
+            LogInCommand =new RelayParameterizedCommand(async (parameter) => await Login(parameter));
         }
         #endregion
 
@@ -49,16 +45,15 @@ namespace Beata.Medrek
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        private void Login(object parameter)
+        private async Task Login(object parameter)
         {
-            // Terminate Command if Login Command is already running
+           // Terminate Command if Login Command is already running
             if (IsLogInRunning)
                 return;
 
             // Flag IsLogInRunning to true
             IsLogInRunning = true;
 
-            
             try
             {
                 var staff = new Staff
@@ -73,7 +68,6 @@ namespace Beata.Medrek
                     Title = "Mr",
 
                 };
-
                 var patient = new Patient
                 {
                     LastName = "Otiete",
@@ -86,36 +80,30 @@ namespace Beata.Medrek
                     
                 };
 
-                // Test CRUD EXTENSIONS
-
-                //using (var context = new ApplicationDbContext(DI.DbOptions))
-                //{
-                //   var test1= context.AddPatient(patient);
-                //   var test2= context.FindPatient(patient);
-                //    var test3 = context.GetAllPatients();
-                //    var test4 = context.DeletePatient(patient);
-                //}
-
-
-                using (var dbContext = new ApplicationDbContext(DI.DbOptions))
+                await Task.Run(async () =>
                 {
-                    Staff User = dbContext.StaffLogin(UserName,
-                    (parameter as IHavePassword).securePassword.Unsecure(),
-                    out bool Granted);
-
-                    if (Granted == true)
+                    using (var dbContext = new ApplicationDbContext(DI.DbOptions))
                     {
-                        DI.StaffCache.SetObject(User);
-                        DI.ApplicationViewModel.GotoPage(ApplicationPage.MainMenu, new MainMenuPageViewModel());
+                        Staff User = dbContext.StaffLogin(UserName,
+                            (parameter as IHavePassword).securePassword.Unsecure(),
+                            out bool Granted);
+
+                        if (Granted == true)
+                        {
+                            // Call Application to Handle Succefull login
+                          DI.ApplicationViewModel.HandleSuccessfulLogin(User);
+                        }
+
+                        else
+                        {
+                            DI.ApplicationViewModel.ShowNotification("Wrong Username or Password\nEnter Correct Credentials!", NotificationMode.error);
+                        }
+
                     }
-
-                }
-
+                });
             }
-             
             finally
             {
-
                 // Reset Values
                 IsLogInRunning = false;
             }

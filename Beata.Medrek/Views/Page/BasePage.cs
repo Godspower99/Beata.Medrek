@@ -1,107 +1,223 @@
-﻿
-
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Beata.Medrek
 {
     /// <summary>
-    /// A Base Page With Animation Properties and Datacontext Binding 
-    /// procedures for other pages to Inherit from
+    /// The base page for all pages to gain base functionality
     /// </summary>
-    public class BasePage : Page
+    public class BasePage : UserControl
     {
-        #region Private Fields
+        #region Private Member
 
         /// <summary>
-        /// The ViewModel of this page
+        /// The View Model associated with this page
         /// </summary>
-        private BaseViewModel _viewModel;
+        private object mViewModel;
+
         #endregion
 
         #region Public Properties
 
         /// <summary>
-        /// Slide In/Out Animation Time Duration
+        /// The animation the play when the page is first loaded
         /// </summary>
-        public float SlideSeconds { get; set; } = 0.8f;
+        public PageAnimation PageLoadAnimation { get; set; } = PageAnimation.SlideAndFadeInFromRight;
 
         /// <summary>
-        /// Fade In/Out Animation Time Duration
+        /// The animation the play when the page is unloaded
         /// </summary>
-        public float FadeSeconds { get; set; } = 0.8f;
+        public PageAnimation PageUnloadAnimation { get; set; } = PageAnimation.SlideAndFadeOutToLeft;
 
         /// <summary>
-        /// The ViewModel of this page
+        /// The time any slide animation takes to complete
         /// </summary>
-        public BaseViewModel ViewModel
+        public float SlideSeconds { get; set; } = 0.4f;
+
+        /// <summary>
+        /// A flag to indicate if this page should animate out on load.
+        /// Useful for when we are moving the page to another frame
+        /// </summary>
+        public bool ShouldAnimateOut { get; set; }
+
+        /// <summary>
+        /// The View Model associated with this page
+        /// </summary>
+        public object ViewModelObject
         {
-            get { return _viewModel; }
+            get => mViewModel;
             set
             {
-                // Abort if the ViewModel does not change
-                if (_viewModel == value)
+                // If nothing has changed, return
+                if (mViewModel == value)
                     return;
 
-                // Update the ViewModel
-                _viewModel = value;
+                // Update the value
+                mViewModel = value;
 
-                // Set the DataContext of the page to the ViewModel
-                this.DataContext = _viewModel;
+                // Fire the view model changed method
+                OnViewModelChanged();
+
+                // Set the data context for this page
+                DataContext = mViewModel;
             }
         }
+
         #endregion
 
-        #region Constructors
+        #region Constructor
 
         /// <summary>
-        /// Default Constructor
+        /// Default constructor
         /// </summary>
         public BasePage()
         {
-            // Setting Page Load/Unload Events
-            this.Loaded += BasePage_Loaded;
-            this.Unloaded += BasePage_Unloaded;
+            // Don't bother animating in design time
+            if (DesignerProperties.GetIsInDesignMode(this))
+                return;
+
+            // If we are animating in, hide to begin with
+            if (PageLoadAnimation != PageAnimation.None)
+                Visibility = Visibility.Collapsed;
+
+            // Listen out for the page loading
+            Loaded += BasePage_LoadedAsync;
         }
 
-        /// <summary>
-        /// Constructor with Specific ViewModel
-        /// </summary>
-        public BasePage(BaseViewModel specificViewModel)
-        {
-            //Set DataContext of this Page
-            this.ViewModel = specificViewModel;
-
-            // Setting Page Load/Unload Events
-            this.Loaded += BasePage_Loaded;
-            this.Unloaded += BasePage_Unloaded;
-
-        }
         #endregion
 
-        #region Event handlers
+        #region Animation Load / Unload
 
         /// <summary>
-        /// Page UnLoaded Event Handler
+        /// Once the page is loaded, perform any required animation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void  BasePage_Unloaded(object sender, System.Windows.RoutedEventArgs e)
+        private async void BasePage_LoadedAsync(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Animate Page Out On UnLoading
-          await PageAnimations.SlideAndFadeOutToLeftAsync((Page)sender, SlideSeconds);
-
+            // If we are setup to animate out on load
+            if (ShouldAnimateOut)
+                // Animate out the page
+                await AnimateOutAsync();
+            // Otherwise...
+            else
+                // Animate the page in
+                await AnimateInAsync();
         }
 
         /// <summary>
-        /// Page loaded Event handler
+        /// Animates the page in
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void BasePage_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        /// <returns></returns>
+        public async Task AnimateInAsync()
         {
-            // Animate Page In on Loading
-            await PageAnimations.SlideAndFadeInFromRightAsync((Page)sender, SlideSeconds);
+            // Make sure we have something to do
+            if (PageLoadAnimation == PageAnimation.None)
+                return;
+
+            switch (PageLoadAnimation)
+            {
+                case PageAnimation.SlideAndFadeInFromRight:
+
+                    // Start the animation
+                    await this.SlideAndFadeInAsync(AnimationSlideInDirection.Right, false, SlideSeconds, size: (int)Application.Current.MainWindow.Width);
+
+                    break;
+            }
         }
+
+        /// <summary>
+        /// Animates the page out
+        /// </summary>
+        /// <returns></returns>
+        public async Task AnimateOutAsync()
+        {
+            // Make sure we have something to do
+            if (PageUnloadAnimation == PageAnimation.None)
+                return;
+
+            switch (PageUnloadAnimation)
+            {
+                case PageAnimation.SlideAndFadeOutToLeft:
+
+                    // Start the animation
+                    await this.SlideAndFadeOutAsync(AnimationSlideInDirection.Left, SlideSeconds);
+
+                    break;
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Fired when the view model changes
+        /// </summary>
+        protected virtual void OnViewModelChanged()
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// A base page with added ViewModel support
+    /// </summary>
+    public class BasePage<VM> : BasePage
+        where VM : BaseViewModel, new()
+    {
+        #region Public Properties
+
+        /// <summary>
+        /// The view model associated with this page
+        /// </summary>
+        public VM ViewModel
+        {
+            get => (VM)ViewModelObject;
+            set => ViewModelObject = value;
+        }
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public BasePage() : base()
+        {
+            // If in design time mode...
+            if (DesignerProperties.GetIsInDesignMode(this))
+                // Just use a new instance of the VM
+                ViewModel = new VM();
+            else
+                // Create a default view model
+                ViewModel = (VM)DI.ApplicationViewModel.CurrentPageViewModel ?? new VM();
+        }
+
+        /// <summary>
+        /// Constructor with specific view model
+        /// </summary>
+        /// <param name="specificViewModel">The specific view model to use, if any</param>
+        public BasePage(VM specificViewModel = null) : base()
+        {
+            // Set specific view model
+            if (specificViewModel != null)
+                ViewModel = specificViewModel;
+            else
+            {
+                // If in design time mode...
+                if (DesignerProperties.GetIsInDesignMode(this))
+                    // Just use a new instance of the VM
+                    ViewModel = new VM();
+                else
+                {
+                    // Create a default view model
+                    ViewModel = (VM)DI.ApplicationViewModel.CurrentPageViewModel ?? new VM();
+                }
+            }
+        }
+
         #endregion
     }
 }

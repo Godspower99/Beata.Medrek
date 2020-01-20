@@ -138,6 +138,7 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="PropertyChanged, Version=1.52.1.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.1.52.1\Lib\portable-net4+sl4+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
       <Private>True</Private>
@@ -326,6 +327,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core ViewModels\Dialogs\AddNewPatientDialogViewModel.cs" />
+    <Compile Include="Core ViewModels\Dialogs\WarningDialogViewModel.cs" />
+    <Compile Include="Core ViewModels\Unfinished Registration\UnfinishedRegistrationListitemViewModel.cs" />
+    <Compile Include="DataModels\Entities\PatientAddress.cs" />
+    <Compile Include="DataModels\Enumerations\NotificationMode.cs" />
+    <Compile Include="DataModels\Enumerations\DialogBoxResult.cs" />
+    <Compile Include="DataModels\Enumerations\WarningMode.cs" />
     <Compile Include="Design ViewModel [Delete Later]\RegisterPatientDesignModel.cs" />
     <Compile Include="Extensions\DbCRUDExtensions.cs" />
     <Compile Include="Interface Implementations\StaffCache.cs" />
@@ -340,11 +348,10 @@
     <Compile Include="Core ViewModels\Pages\MainMenuPageViewModel.cs" />
     <Compile Include="Core ViewModels\UserControl\RegisterUserViewModel.cs" />
     <Compile Include="Core ViewModels\ViewModelLocator.cs" />
-    <Compile Include="DataModels\ApplicationPage.cs" />
+    <Compile Include="DataModels\Enumerations\ApplicationPage.cs" />
     <Compile Include="DataModels\DbContext\HospitalDatabase.cs" />
     <Compile Include="DataModels\Entities\FamilyContact.cs" />
     <Compile Include="DataModels\Entities\Patient.cs" />
-    <Compile Include="DataModels\Entities\PatientAddress.cs" />
     <Compile Include="DataModels\Entities\PatientOriginOfBirth.cs" />
     <Compile Include="DataModels\Entities\PatientPhone.cs" />
     <Compile Include="DataModels\Entities\PatientsNotes.cs" />
@@ -361,18 +368,81 @@
     <Compile Include="Migrations\20200112014517_Initial.designer.cs">
       <DependentUpon>20200112014517_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200114062416_CorrectStaffMiddleName.cs" />
+    <Compile Include="Migrations\20200114062416_CorrectStaffMiddleName.designer.cs">
+      <DependentUpon>20200114062416_CorrectStaffMiddleName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200117112252_RemovedPatientAddressEntity.cs" />
+    <Compile Include="Migrations\20200117112252_RemovedPatientAddressEntity.designer.cs">
+      <DependentUpon>20200117112252_RemovedPatientAddressEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200120010940_Updated_patient_address_and_Occupation.cs" />
+    <Compile Include="Migrations\20200120010940_Updated_patient_address_and_Occupation.designer.cs">
+      <DependentUpon>20200120010940_Updated_patient_address_and_Occupation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200120012700_Updated_patient_address_and_Occupation_and_City.cs" />
+    <Compile Include="Migrations\20200120012700_Updated_patient_address_and_Occupation_and_City.designer.cs">
+      <DependentUpon>20200120012700_Updated_patient_address_and_Occupation_and_City.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Security\SecurityHelpers.cs" />
     <Compile Include="Server Details\ServerDetails.cs" />
+    <Compile Include="Value Converters\ApplicationPageHelpers.cs" />
+    <Compile Include="Value Converters\AddTextConverter.cs" />
+    <Compile Include="Value Converters\WarningModeToColorConverter.cs" />
+    <Compile Include="Value Converters\NotificationModeToSolidColorConverter.cs" />
+    <Compile Include="Value Converters\NotificationModeToTextConverter.cs" />
+    <Compile Include="Value Converters\NotificationModeToColorConverter.cs" />
     <Compile Include="Value Converters\BooleanToOpacityConverter.cs" />
+    <Compile Include="Views\Dialogs\AddNewPatientOption.xaml.cs">
+      <DependentUpon>AddNewPatientOption.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\WarningDialog.xaml.cs">
+      <DependentUpon>WarningDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialogs\DialogBox.xaml.cs">
       <DependentUpon>DialogBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Design ViewModel [Delete Later]\OperatorDesignModel.cs" />
+    <Compile Include="Views\Dialogs\AddNewPatientDialog.xaml.cs">
+      <DependentUpon>AddNewPatientDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Page\BasePage.cs" />
+    <Compile Include="Views\UserControls\NewPatientFormGeneralInformationControl.xaml.cs">
+      <DependentUpon>NewPatientFormGeneralInformationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\NewPatientFormTabControl.xaml.cs">
+      <DependentUpon>NewPatientFormTabControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\NotificationDialog.xaml.cs">
+      <DependentUpon>NotificationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\LoggedInStaffSideMenu.xaml.cs">
+      <DependentUpon>LoggedInStaffSideMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\NavigationSideMenuControl.xaml.cs">
+      <DependentUpon>NavigationSideMenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PageHost.xaml.cs">
+      <DependentUpon>PageHost.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\RegisterPatientUserControl.xaml.cs">
       <DependentUpon>RegisterPatientUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\Unfinished Registration\UnfinishedRegistrationListItem.xaml.cs">
+      <DependentUpon>UnfinishedRegistrationListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Unfinished Registration\UnfinishedRegistrations.xaml.cs">
+      <DependentUpon>UnfinishedRegistrations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Unfinished Registration\UnfinishedRegistrationsList.xaml.cs">
+      <DependentUpon>UnfinishedRegistrationsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowResizer.cs" />
+    <Page Include="Styles\ExtraControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Images.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -393,9 +463,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Dialogs\AddNewPatientOption.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\WarningDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Dialogs\DialogBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\AddNewPatientDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Page\LoginPage.xaml">
       <SubType>Designer</SubType>
@@ -405,7 +487,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\NewPatientFormGeneralInformationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\NewPatientFormTabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\NotificationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\LoggedInStaffSideMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\NavigationSideMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\PageHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\RegisterPatientUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Unfinished Registration\UnfinishedRegistrationListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Unfinished Registration\UnfinishedRegistrations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Unfinished Registration\UnfinishedRegistrationsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -427,12 +545,10 @@
     <Compile Include="Attached Properties\Animations\FrameworkElementAnimationAttachedProperties.cs" />
     <Compile Include="Attached Properties\Frame\ClearFrameHistory.cs" />
     <Compile Include="Attached Properties\PasswordBox\PasswordBoxAttachedProperties.cs" />
-    <Compile Include="Value Converters\ApplicationPageValueConverter.cs" />
     <Compile Include="Value Converters\BaseValueConverter.cs" />
     <Compile Include="Value Converters\BooleanToVisibilityValueConverter.cs" />
     <Compile Include="Value Converters\MaximizeButtonImageValueConverter.cs" />
     <Compile Include="ViewModels\Windows\ShellWindowViewModel.cs" />
-    <Compile Include="Views\Page\BasePage.cs" />
     <Compile Include="Views\Page\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>

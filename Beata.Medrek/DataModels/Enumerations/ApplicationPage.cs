@@ -14,5 +14,10 @@
         /// Main Menu Page
         /// </summary>
         MainMenu=1,
+
+        /// <summary>
+        /// Add New Patient Page
+        /// </summary>
+        AddNewpatient=2,
     }
 }
