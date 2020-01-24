@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,11 +96,23 @@ namespace Beata.Medrek
         /// </summary>
         /// <param name="dbContext"></param>
         /// <returns><see cref="List{Patient}"/></returns>
-        public static List<Patient> GetAllPatients(this ApplicationDbContext dbContext)
+        public static ObservableCollection<Patient> SearchPatients(this ApplicationDbContext dbContext,string firstName,string Lastname,out bool found)
         {
             try
             {
-                return dbContext.Patients.ToList();
+                var linq = dbContext.Patients.Where(p => p.LastName == Lastname || p.FirstName == firstName)
+                                                        .OrderBy(p => p.LastName)
+                                                        .OrderBy(p => p.FirstName)
+                                                        .ToList();
+                if (linq.Count() > 0)
+                {
+                    ObservableCollection<Patient> foundPatients = new ObservableCollection<Patient>(linq);
+                    found = true;
+                    return foundPatients;
+                }
+
+                found = false;
+                return null;
             }
 
             catch(Exception e)

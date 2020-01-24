@@ -12,19 +12,25 @@
             <!--Side menu Switch-->
             <Button Style="{StaticResource NavigationSwitchButton}"
                      Command="{Binding ApplicationViewModel.ToggleNavigationControlCommand}"
-                    Content="&#xf0c9;"/>
+                     Content="&#xf0c9;"/>
             
             <!--Main Menu Nav-->
-            <Button Style="{StaticResource NavigationButton}"
-                    Content="&#xf015;"/>
+            <Button x:Name="mainmenu"
+                     Style="{StaticResource NavigationButton}"
+                     Content="&#xf015;"
+                    Click="Mainmenu_Click"/>
 
             <!--Add New User-->
-            <Button Style="{StaticResource NavigationButton}"
-                    Content="{StaticResource UserPlus}"/>
+            <Button x:Name="newuser"
+                    Style="{StaticResource NavigationButton}"
+                    Content="{StaticResource UserPlus}"
+                    Click="Newuser_Click"/>
 
             <!--Search new User Nav-->
-            <Button Style="{StaticResource NavigationButton}"
-                    Content="{StaticResource SearchIcon}"/>
+            <Button x:Name="search"
+                    Style="{StaticResource NavigationButton}"
+                    Content="{StaticResource SearchIcon}"
+                    Click="Search_Click"/>
 
             <!--Scheduler Nav-->
             <Button Style="{StaticResource NavigationButton}"

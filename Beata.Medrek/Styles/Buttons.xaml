@@ -192,6 +192,7 @@
     <Style  TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundMainBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Consolas}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontSize" Value="{StaticResource Regular}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -214,7 +215,7 @@
                         </Border.Effect>
                         <Grid>
                             <Label x:Name="loginText"
-                                   FontFamily="{StaticResource Consolas}"
+                                   FontFamily="{TemplateBinding FontFamily}"
                                    FontSize="{TemplateBinding FontSize}"
                                     Visibility="{TemplateBinding local:IsBusyAttachedProperty.IsBusy,Converter={local:BooleanToVisibilityValueConverter}}"
                                    Content="{TemplateBinding Content}"

@@ -258,7 +258,7 @@
                                         Background="{StaticResource BackgroundBrush}"
                                        Foreground="{StaticResource ForegroundMainBrush}"
                                        FontSize="18"
-                                       Text="{Binding RelativeSource={RelativeSource TemplatedParent},Mode=OneWayToSource,Path=Text,UpdateSourceTrigger=PropertyChanged}"
+                                       Text="{Binding RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay,Path=Text,UpdateSourceTrigger=PropertyChanged}"
                                        FontFamily="{StaticResource LatoBold}"
                                        BorderThickness="0"
                                        TextAlignment="Left"

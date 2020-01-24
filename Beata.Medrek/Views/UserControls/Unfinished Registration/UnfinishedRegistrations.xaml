@@ -25,11 +25,11 @@
                                      BorderBrush="Blue"
                                      CornerRadius="{Binding ActualWidth,RelativeSource={RelativeSource Self}}">
                                 <Border.Effect>
-                                    <DropShadowEffect BlurRadius="0"
-                                  ShadowDepth="7" 
-                                  Opacity="0.5"/>
+                                    <DropShadowEffect BlurRadius="0"   
+                                                        ShadowDepth="7" 
+                                                        Opacity="0.5"
+                                                      />
                                 </Border.Effect>
-
                             </Border>
 
                             <Border Padding="15"
@@ -62,7 +62,9 @@
                                     Height="{Binding RelativeSource={RelativeSource Self},Path=ActualWidth}"
                                    CornerRadius="{Binding RelativeSource={RelativeSource Self},Path=ActualWidth}">
                                 <Border.Effect>
-                                    <DropShadowEffect BlurRadius="0" ShadowDepth="7" Opacity="0.5"/>
+                                    <DropShadowEffect BlurRadius="0" 
+                                                      ShadowDepth="7" 
+                                                      Opacity="0.5"/>
                                 </Border.Effect>
 
                                 <TextBlock Text="{Binding ApplicationViewModel.NumberOfUnfinishedRegistrationDialog,
@@ -79,7 +81,7 @@
                         </Grid>
 
                         <ControlTemplate.Triggers>
-                           
+                            
                             <EventTrigger RoutedEvent="MouseEnter">
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -132,6 +134,7 @@
                                 </BeginStoryboard>
                             </EventTrigger>
                         </ControlTemplate.Triggers>
+                        
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

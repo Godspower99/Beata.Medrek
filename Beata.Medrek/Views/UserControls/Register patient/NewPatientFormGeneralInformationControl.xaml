@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Beata.Medrek"
              mc:Ignorable="d" 
-             d:DesignHeight="750" 
+             d:DesignHeight="1500" 
              d:DesignWidth="700"
             >
     <Border CornerRadius="0 0 15 15"
@@ -223,8 +223,7 @@
                                       />
 
                             </Grid>
-
-
+                            
                             <!--RelationShip Status Selection-->
                             <Grid Grid.Column="2"
                                   HorizontalAlignment="Right"

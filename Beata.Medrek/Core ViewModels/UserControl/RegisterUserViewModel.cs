@@ -63,70 +63,9 @@ namespace Beata.Medrek
         public RegisterUserViewModel()
         {
             Patient = new Patient();
-
-            // Bind Commands TO Methods
-            SaveCommand = new RelayCommand(Save);
         }
 
         #endregion
 
-        #region Commands
-
-        /// <summary>
-        /// Load Image Command
-        /// </summary>
-        public ICommand LoadCommand { get; set; }
-
-        /// <summary>
-        /// Clear image Command
-        /// </summary>
-        public ICommand ClearCommand { get; set; }
-
-        /// <summary>
-        /// Save Patient Command
-        /// </summary>
-        public ICommand SaveCommand { get; set; }
-
-        /// <summary>
-        /// Cancel Registration Command
-        /// </summary>
-        public ICommand CancelCommand { get; set; }
-        #endregion
-
-        #region Command Methods
-
-        /// <summary>
-        /// Save New User Command Method
-        /// </summary>
-        private void Save()
-        {
-       
-        }
-
-        /// <summary>
-        /// Cance New User Registration Command Method
-        /// </summary>
-        private void Cancel()
-        {
-
-        }
-
-        /// <summary>
-        /// Load New User Picture Command Method
-        /// </summary>
-        private void Load()
-        {
-
-        }
-
-        /// <summary>
-        /// Clear New User Picture Command Method
-        /// </summary>
-        private void Clear()
-        {
-
-        }
-
-        #endregion
     }
 }

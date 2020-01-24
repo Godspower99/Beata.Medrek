@@ -23,7 +23,7 @@ namespace Beata.Medrek
         /// <summary>
         /// Specific DataContext for the Current Page
         /// </summary>
-        public BaseViewModel CurrentPageViewModel { get; set; }
+        public object CurrentPageViewModel { get; set; } 
 
         /// <summary>
         /// Flag for Enabling and Disabling Side Menu Visibility
@@ -50,7 +50,7 @@ namespace Beata.Medrek
         /// </summary>
         public bool ShowNotificationControl { get; set; }
 
-       /// <summary>
+        /// <summary>
        /// Notification mode
        /// </summary>
         public NotificationMode NotificationMode { get; set; }
@@ -152,7 +152,7 @@ namespace Beata.Medrek
         /// </summary>
         /// <param name="page">The page to go to</param>
         /// <param name="viewModel">The view model, if any, to set explicitly to the new page</param>
-        public void GoToPage(ApplicationPage page, BaseViewModel viewModel = null)
+        public void GoToPage(ApplicationPage page, object viewModel = null)
         {
             // Set the view model
             CurrentPageViewModel = viewModel;
@@ -193,10 +193,14 @@ namespace Beata.Medrek
         /// <param name="staff"></param>
         public async void HandleSuccessfulLogin(Staff staff)
         {
+            // Memory Cache of Current Logged in Staff
             LoggedInStaff= staff;
+            
            ShowNotification("Welcome!", NotificationMode.success);
             await Task.Delay(500);
-           GoToPage(ApplicationPage.MainMenu, new MainMenuPageViewModel());
+
+            // Navigate to MainMenu
+            GoToPage(ApplicationPage.MainMenu, new MainMenuPageViewModel());
         }
 
         #endregion
@@ -225,6 +229,8 @@ namespace Beata.Medrek
         /// </summary>
         private async void LogOut()
         {
+            // Check number of unfinished Registrations
+            // and Prompt if available
             if (NumberOfUnfinishedRegistrationDialog > 0)
             {
                 var result = DI.UiManager
@@ -241,8 +247,12 @@ namespace Beata.Medrek
 
             await Task.Run(() =>
             {
+                // Reset Memory cache of current logged in staff
                 LoggedInStaff = null;
+
                 ShowStaffDetailsVisible = false;
+
+                // Navigate to Login page
                 GoToPage(ApplicationPage.Login);
             });
         }
@@ -333,6 +343,7 @@ namespace Beata.Medrek
         /// </summary>
         public void ClearAllUnfinishedRegistration()
         {
+            // Clear all unfinished registration list items and close corresponding windows
             foreach (UnfinishedRegistrationListitemViewModel un in UnfinishedRegistrationListItems)
             {
                 var winitem = UnfinishedRegistrationList.FirstOrDefault(p => p.ID == un.ID);
@@ -367,8 +378,9 @@ namespace Beata.Medrek
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public ApplicationViewModel( )
+        public ApplicationViewModel()
         {
+            // Bind Commands to Actions
             ToggleStaffControlCommand = new RelayCommand(ToggleStaffNavigation);
             ToggleNavigationControlCommand = new RelayCommand(ToggleNavigationControl);
             LogOutCommand = new RelayCommand(LogOut);

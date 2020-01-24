@@ -19,5 +19,10 @@
         /// Add New Patient Page
         /// </summary>
         AddNewpatient=2,
+
+        /// <summary>
+        /// Patient Information View
+        /// </summary>
+        PatientInformation=3,
     }
 }

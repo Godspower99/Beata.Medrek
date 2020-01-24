@@ -17,17 +17,34 @@ namespace Beata.Medrek
 
         #region Public Properties
 
-
+        /// <summary>
+        /// New Patient to register
+        /// </summary>
         public Patient Patient { get; set; } = new Patient();
 
+        /// <summary>
+        /// The patients family contacts
+        /// </summary>
         public List<FamilyContact> FamilyContacts { get; set; } = new List<FamilyContact>();
 
+        /// <summary>
+        /// The patient Phone Contacts
+        /// </summary>
         public PatientPhone Phone { get; set; } = new PatientPhone();
 
+        /// <summary>
+        /// Patient NOtes
+        /// </summary>
         public List<PatientsNotes> Notes { get; set; } = new List<PatientsNotes>();
 
+        /// <summary>
+        /// Patient Origin of Birth Information
+        /// </summary>
         public PatientOriginOfBirth OriginOfBirth { get; set; } = new PatientOriginOfBirth();
 
+        /// <summary>
+        /// Patient Address Information
+        /// </summary>
         public PatientAddress PatientAddress { get; set; } = new PatientAddress();
         #endregion
 
@@ -74,6 +91,7 @@ namespace Beata.Medrek
         /// </summary>
         private void Minimize()
         {
+            // Minimize dialog and add it to unfinished registrations List
             DI.ApplicationViewModel.AddUnfinishedRegistrationListItem(_dialog); 
         }
 
@@ -96,6 +114,7 @@ namespace Beata.Medrek
 
         /// <summary>
         /// Save Patient to the Database
+        /// After Confirmation
         /// </summary>
         private void Save()
         {
@@ -132,6 +151,7 @@ namespace Beata.Medrek
                 }
             }
 
+            
             DI.ApplicationViewModel.ShowNotification(message: "Please Fill all Required Fields", NotificationMode.error);
         }
 
@@ -154,6 +174,11 @@ namespace Beata.Medrek
 
         #region Helper Methods
 
+        /// <summary>
+        /// Model Validation to Check
+        /// all Required fields has been entered
+        /// </summary>
+        /// <returns></returns>
         private bool ModelValidation()
         {
             if (!string.IsNullOrWhiteSpace(Patient.LastName))
@@ -168,6 +193,11 @@ namespace Beata.Medrek
                               
         }
 
+        /// <summary>
+        /// Demo:: MedRekNO Generator 
+        /// TODO IMPORTANT:: update later to generate truly unique values
+        /// </summary>
+        /// <returns></returns>
         private string GenerateMedRekNO()
         {
             string firstletter = Patient.LastName[0].ToString().ToUpper();

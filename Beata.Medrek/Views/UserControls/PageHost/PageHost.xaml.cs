@@ -34,9 +34,9 @@ namespace Beata.Medrek
         /// <summary>
         /// The current page to show in the page host
         /// </summary>
-        public BaseViewModel CurrentPageViewModel
+        public object CurrentPageViewModel
         {
-            get => (BaseViewModel)GetValue(CurrentPageViewModelProperty);
+            get => (object)GetValue(CurrentPageViewModelProperty);
             set => SetValue(CurrentPageViewModelProperty, value);
         }
 
@@ -45,7 +45,7 @@ namespace Beata.Medrek
         /// </summary>
         public static readonly DependencyProperty CurrentPageViewModelProperty =
             DependencyProperty.Register(nameof(CurrentPageViewModel),
-                typeof(BaseViewModel), typeof(PageHost),
+                typeof(object), typeof(PageHost),
                 new UIPropertyMetadata());
 
         #endregion

@@ -29,7 +29,8 @@
                          Height="{Binding ActualWidth,RelativeSource={RelativeSource Self}}"
                         Tag="Find A Patient"
                         Content="{StaticResource SearchIcon}"
-                       />
+                       Command="{Binding SearchCommand}"
+                        />
 
                 <!--Unknown Function Button-->
                 <Button Style="{StaticResource MainMenuButton}"

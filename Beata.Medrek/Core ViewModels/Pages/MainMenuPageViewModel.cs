@@ -17,34 +17,14 @@ namespace Beata.Medrek
         ///<Summary>
         public MainMenuPageViewModel()
         {
-            LogOutCommand = new RelayCommand(LogOut);
+            // Bind Commands to Actions
             RegisterCommand = new RelayCommand(Register);
+            SearchCommand = new RelayCommand(Search);
         }
 
         #endregion
 
         #region Public Properties
-
-        public Staff staff => DI.StaffCache.Object;
-        /// <summary>
-        /// Staff FullName
-        /// </summary>
-        public string StaffName => $"{staff.LastName} {staff.FirstName} {staff.MiddleName}";
-
-        /// <summary>
-        /// Staff UserName
-        /// </summary>
-        public string UserName=> staff.UserName;
-
-        /// <summary>
-        /// Staff Admin Status
-        /// </summary>
-        public bool AdminStatus => staff.IsAdmin;
-
-        /// <summary>
-        /// Staff Login Time
-        /// </summary>
-        public string StaffLoginTime => DateTime.Now.ToLongTimeString();
 
         #endregion
 
@@ -60,43 +40,28 @@ namespace Beata.Medrek
         /// </summary>
         public ICommand SearchCommand { get; set; }
 
-        /// <summary>
-        /// LogOut Operator
-        /// </summary>
-        public ICommand LogOutCommand { get; set; }
-
         #endregion
 
         #region Command Methods
-
-        /// <summary>
-        /// Method Called when LogOut Command is Activated
-        /// </summary>
-        private void LogOut()
-        {
-           
-           using(var dbContext=new ApplicationDbContext(DI.DbOptions))
-            {
-                dbContext.StaffLogout();
-
-                // Go Back to Login Page
-              //  DI.ApplicationViewModel.GotoPage(ApplicationPage.Login);
-            }
-
-        }
-       
 
         /// <summary>
         /// Opens Dialog Box to register a new Patient
         /// </summary>
         private void Register()
         {
+            // Prompt search with medrek number 
             var result = DI.UiManager.ShowAddNewPatientOptionDialog();
 
+            // if patient has no medrek number 
             if(result==DialogBoxResult.No)
             new AddNewPatientDialog().ShowDialog();
 
             // TODO :: Talk to Server to retrieve patient Information
+        }
+       
+        private void Search()
+        {
+            new SearchPage().ShowDialog();
         }
         #endregion
     }

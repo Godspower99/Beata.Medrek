@@ -328,8 +328,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core ViewModels\Dialogs\AddNewPatientDialogViewModel.cs" />
+    <Compile Include="Core ViewModels\Dialogs\SearchPatientViewModel.cs" />
     <Compile Include="Core ViewModels\Dialogs\WarningDialogViewModel.cs" />
     <Compile Include="Core ViewModels\Unfinished Registration\UnfinishedRegistrationListitemViewModel.cs" />
+    <Compile Include="Core ViewModels\Pages\PatientInformationPageViewModel.cs" />
     <Compile Include="DataModels\Entities\PatientAddress.cs" />
     <Compile Include="DataModels\Enumerations\NotificationMode.cs" />
     <Compile Include="DataModels\Enumerations\DialogBoxResult.cs" />
@@ -408,26 +410,44 @@
       <DependentUpon>AddNewPatientDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Page\BasePage.cs" />
-    <Compile Include="Views\UserControls\NewPatientFormGeneralInformationControl.xaml.cs">
+    <Compile Include="Views\Page\PatientInformationPage.xaml.cs">
+      <DependentUpon>PatientInformationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Page\SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Patient Information\PatientInformationControl.xaml.cs">
+      <DependentUpon>PatientInformationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Patient Information\PatientInformationListItem.xaml.cs">
+      <DependentUpon>PatientInformationListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Register patient\NewPatientFormGeneralInformationControl.xaml.cs">
       <DependentUpon>NewPatientFormGeneralInformationControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\NewPatientFormTabControl.xaml.cs">
+    <Compile Include="Views\UserControls\Register patient\NewPatientFormTabControl.xaml.cs">
       <DependentUpon>NewPatientFormTabControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\NotificationDialog.xaml.cs">
+    <Compile Include="Views\UserControls\Notification\NotificationDialog.xaml.cs">
       <DependentUpon>NotificationDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\LoggedInStaffSideMenu.xaml.cs">
+    <Compile Include="Views\UserControls\Navigation\LoggedInStaffSideMenu.xaml.cs">
       <DependentUpon>LoggedInStaffSideMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\NavigationSideMenuControl.xaml.cs">
+    <Compile Include="Views\UserControls\Navigation\NavigationSideMenuControl.xaml.cs">
       <DependentUpon>NavigationSideMenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\PageHost.xaml.cs">
+    <Compile Include="Views\UserControls\PageHost\PageHost.xaml.cs">
       <DependentUpon>PageHost.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\RegisterPatientUserControl.xaml.cs">
+    <Compile Include="Views\UserControls\Register patient\RegisterPatientUserControl.xaml.cs">
       <DependentUpon>RegisterPatientUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\SearchPatient\SearchPatientList.xaml.cs">
+      <DependentUpon>SearchPatientList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\SearchPatient\SearchPatientListItem.xaml.cs">
+      <DependentUpon>SearchPatientListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\Unfinished Registration\UnfinishedRegistrationListItem.xaml.cs">
       <DependentUpon>UnfinishedRegistrationListItem.xaml</DependentUpon>
@@ -487,31 +507,55 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\NewPatientFormGeneralInformationControl.xaml">
+    <Page Include="Views\Page\PatientInformationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\NewPatientFormTabControl.xaml">
+    <Page Include="Views\Page\SearchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\NotificationDialog.xaml">
+    <Page Include="Views\UserControls\Patient Information\PatientInformationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\LoggedInStaffSideMenu.xaml">
+    <Page Include="Views\UserControls\Patient Information\PatientInformationListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\NavigationSideMenuControl.xaml">
+    <Page Include="Views\UserControls\Register patient\NewPatientFormGeneralInformationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\PageHost.xaml">
+    <Page Include="Views\UserControls\Register patient\NewPatientFormTabControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\RegisterPatientUserControl.xaml">
+    <Page Include="Views\UserControls\Notification\NotificationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Navigation\LoggedInStaffSideMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Navigation\NavigationSideMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\PageHost\PageHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Register patient\RegisterPatientUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\SearchPatient\SearchPatientList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\SearchPatient\SearchPatientListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

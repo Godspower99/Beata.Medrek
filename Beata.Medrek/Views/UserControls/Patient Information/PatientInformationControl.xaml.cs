@@ -16,13 +16,14 @@ using System.Windows.Shapes;
 namespace Beata.Medrek
 {
     /// <summary>
-    /// Interaction logic for NavigationSideMenuControl.xaml
+    /// Interaction logic for PatientInformationControl.xaml
     /// </summary>
-    public partial class NavigationSideMenuControl : UserControl
+    public partial class PatientInformationControl : UserControl
     {
-        public NavigationSideMenuControl()
+        public PatientInformationControl()
         {
             InitializeComponent();
+
         }
     }
 }

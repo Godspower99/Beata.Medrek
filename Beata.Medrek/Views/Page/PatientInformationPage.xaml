@@ -1,0 +1,298 @@
+﻿<local:BasePage x:Class="Beata.Medrek.PatientInformationPage"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+               xmlns:local="clr-namespace:Beata.Medrek"
+               mc:Ignorable="d" 
+               d:DesignHeight="700" d:DesignWidth="1000"
+               >
+
+    <Border Padding="10">
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--page Title-->
+            <TextBlock FontFamily="{StaticResource Terminax}"
+                   FontStyle="Italic"
+                   FontSize="25"
+                   FontWeight="SemiBold"
+                   Padding="15">
+            <Run Text="Patient" Foreground="DarkGreen"/>
+            <Run Text="Medical" Foreground="SteelBlue"/>
+            <Run Text="Information" Foreground="DarkBlue"/>
+            </TextBlock>
+
+            <StackPanel Grid.Row="1">
+
+                <!--Blue Section-->
+                <StackPanel Orientation="Horizontal"
+                        TextElement.FontSize="16"
+                        TextElement.Foreground="White"
+                        Background="SteelBlue"
+                        >
+
+
+                    <TextBlock Padding="10 5 10 5">
+                    
+                    <!--Last name-->
+                    <Run Text="{Binding Patient.LastName}"/>
+                   
+                    <!--First name-->
+                    <Run Text="{Binding Patient.FirstName}"/>
+                    
+                    <!--Middle Name-->
+                    <Run Text="{Binding Patient.MiddleName}"/>
+                    
+                    <!--Seperator-->
+                    <Run Text="|" FontSize="20" 
+                         Foreground="DarkBlue"
+                         FontWeight="Bold"
+                         />
+                    
+                    <!--Gender-->
+                    <Run Text="{Binding Patient.Gender}"/>
+                    
+                    <!--Seperator-->
+                    <Run Text="|" FontSize="20" 
+                         Foreground="DarkBlue"
+                         FontWeight="Bold"
+                         />
+                    
+                    <!--Date of Birth-->
+                     <Run Text="{Binding Patient.DateOfBirth}"/>
+                    
+                    <!--Seperator-->
+                    <Run Text="|" FontSize="20" 
+                         Foreground="DarkBlue"
+                         FontWeight="Bold"
+                         />
+                    
+                    <!--Medrek No-->
+                    <Run Text="MedRek NO :"/>
+                     <Run Text="{Binding Patient.MedRekNO}"/>
+                    </TextBlock>
+                </StackPanel>
+
+                <!--Information Section-->
+                <Border Padding="5 0 5 0"
+                    Margin="0 10 0 0">
+                    <Grid TextBlock.FontSize="14"
+                  TextBlock.TextAlignment="Left"
+                  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!--MedrekNO-->
+                        <TextBlock Grid.Column="0"
+                               Grid.Row="0"
+                               Padding="5"
+                               >
+                    
+                    <Run Text="MedRek NO :"/>
+                     <Run Text="{Binding Patient.MedRekNO}" />
+                        </TextBlock>
+
+                        <!--Address1-->
+                        <TextBlock Grid.Column="1"
+                           Grid.Row="0"
+                            Padding="5">
+                    
+                    <Run Text="Address :"/>
+                     <Run Text="{Binding PatientAddress.PrimaryAddress}"/>
+                        </TextBlock>
+
+                        <!--Address2-->
+                        <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                            Padding="5">
+                    
+                    <Run Text="Address 2 :"/>
+                     <Run Text="{Binding PatientAddress.SecondaryAddress}"/>
+                        </TextBlock>
+
+                        <!--Email-->
+                        <TextBlock Grid.Column="0"
+                           Grid.Row="1"
+                            Padding="5">
+                    
+                    <Run Text="Email :"/>
+                     <Run Text="{Binding Phone.EmailAddress}"/>
+                        </TextBlock>
+
+                        <!--Phone 1-->
+                        <TextBlock Grid.Column="0"
+                           Grid.Row="2"
+                            Padding="5">
+                    
+                    <Run Text="Phone :"/>
+                     <Run Text="{Binding Phone.PrimaryPhone}"/>
+                        </TextBlock>
+
+                        <!--Phone 2-->
+                        <TextBlock Grid.Column="0"
+                           Grid.Row="3"
+                            Padding="5">
+                    
+                    <Run Text="Phone 2 :"/>
+                     <Run Text="{Binding Phone.SecondaryPhone}"/>
+                        </TextBlock>
+
+                        <!--Occupation-->
+                        <TextBlock Grid.Column="0"
+                           Grid.Row="4"
+                            Padding="5">
+                    
+                    <Run Text="Occupation :"/>
+                     <Run Text="{Binding Patient.Occupation}"/>
+                        </TextBlock>
+
+                        <!--Country-->
+                        <TextBlock Grid.Column="1"
+                           Grid.Row="2"
+                            Padding="5">
+                    
+                    <Run Text="Country :"/>
+                     <Run Text="{Binding OriginOfBirth.Country}"/>
+                        </TextBlock>
+
+                        <!--State-->
+                        <TextBlock Grid.Column="1"
+                           Grid.Row="3"
+                            Padding="5">
+                    
+                    <Run Text="State :"/>
+                     <Run Text="{Binding OriginOfBirth.State}"/>
+                        </TextBlock>
+
+                        <!--City-->
+                        <TextBlock Grid.Column="1"
+                           Grid.Row="4"
+                            Padding="5">
+                    
+                    <Run Text="City :"/>
+                     <Run Text="{Binding OriginOfBirth.City}"/>
+                        </TextBlock>
+
+                        <!--LGA-->
+                        <TextBlock Grid.Column="1"
+                           Grid.Row="5"
+                            Padding="5">
+                    
+                    <Run Text="LGA :"/>
+                     <Run Text="{Binding OriginOfBirth.LGA}"/>
+                        </TextBlock>
+
+                        <!--Marital Status-->
+                        <TextBlock Grid.Column="0"
+                           Grid.Row="5"
+                            Padding="5">
+                    
+                    <Run Text="Marital Status :"/>
+                     <Run Text="{Binding Patient.MaritalStatus}"/>
+                        </TextBlock>
+
+                        <!--Image-->
+                        <Border Grid.Row="0"
+                        Grid.Column="2"
+                        Grid.RowSpan="6"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0 10 30 0"
+                        Width="160"
+                        Height="{Binding ActualWidth,RelativeSource={RelativeSource Self}}"
+                        CornerRadius="15"
+                        Background="LightBlue">
+
+                            <TextBlock Text="No Image"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="18"/>
+                        </Border>
+
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+            <Border Background="LightSteelBlue" 
+                Margin="0 10 0 0"
+                Grid.Row="2"
+                BorderThickness="0"
+                BorderBrush="Gray"
+                Padding="5 5 5 0">
+                <TextBlock Text="{Binding DisplayTitle,FallbackValue=Medications}"
+                       FontSize="18"
+                       FontStyle="Italic"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       Foreground="DarkBlue"
+                       HorizontalAlignment="Center"/>
+            </Border>
+
+            <Grid Grid.Row="3" 
+              Background="{StaticResource VeryLightBlueBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ScrollViewer VerticalScrollBarVisibility="Visible"
+                          Background="{StaticResource VeryLightBlueBrush}"
+                          HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Background="{StaticResource VeryLightBlueBrush}"
+                            Margin="5 10 0 10">
+
+                        <!--Medications-->
+                        <local:PatientInformationListItem
+                        x:Name="medication"
+                        Title="Medications"
+                         InformationItem="Medication"
+                        >
+                            <local:PatientInformationListItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                          Command="{Binding SetPatientInformationCommand}"
+                                          CommandParameter="{Binding InformationItem, ElementName=medication}"/>
+                            </local:PatientInformationListItem.InputBindings>
+                        </local:PatientInformationListItem>
+
+                        <!--Family Contacts-->
+                        <local:PatientInformationListItem
+                        x:Name="familycontacts"
+                        Title="Family Contacts"
+                         InformationItem="FamilyContacts"
+                        >
+                            <local:PatientInformationListItem.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" 
+                                          Command="{Binding SetPatientInformationCommand}"
+                                          CommandParameter="{Binding InformationItem, ElementName=familycontacts}"/>
+                            </local:PatientInformationListItem.InputBindings>
+                        </local:PatientInformationListItem>
+
+                    </StackPanel>
+                </ScrollViewer>
+
+                <DataGrid Grid.Column="1"
+                      Background="{StaticResource VeryLightBlueBrush}"
+                      ItemsSource="{Binding PatientInformation}" 
+                     />
+            </Grid>
+        </Grid>
+    </Border>
+</local:BasePage>

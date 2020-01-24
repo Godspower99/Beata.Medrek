@@ -10,8 +10,13 @@ namespace Beata.Medrek
     public class LoginPageViewModel:BaseViewModel
     {
         #region Constructor
+
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public LoginPageViewModel()
         {
+            // Bind Commands to Actions
             LogInCommand =new RelayParameterizedCommand(async (parameter) => await Login(parameter));
         }
         #endregion
@@ -32,7 +37,7 @@ namespace Beata.Medrek
         #region Commands
 
         /// <summary>
-        /// Logging Command Interface for calling logging Action with parameter 
+        /// Logging Command:: Interface for calling logging Action with parameter 
         /// </summary>
         public ICommand LogInCommand { get; set; }
         
@@ -56,32 +61,9 @@ namespace Beata.Medrek
 
             try
             {
-                var staff = new Staff
-                {
-                    FirstName = "Godspower",
-                    LastName = "otiete",
-                    IsAdmin = false,
-                    Password = "qwerty12",
-                    UserName = "Daemon",
-                    Position = "Doctor",
-                    PrimaryPhone = "08105609572",
-                    Title = "Mr",
-
-                };
-                var patient = new Patient
-                {
-                    LastName = "Otiete",
-                    FirstName = "Godspower",
-                    Gender = "Male",
-                    MedRekNO = "Medrek",
-                    DateOfBirth = DateTime.Now,
-                    MaritalStatus="Single",
-                    RegistrationTime=DateTime.Now,
-                    
-                };
-
                 await Task.Run(async () =>
                 {
+                    // Open new Database Connection with IDisposable
                     using (var dbContext = new ApplicationDbContext(DI.DbOptions))
                     {
                         Staff User = dbContext.StaffLogin(UserName,

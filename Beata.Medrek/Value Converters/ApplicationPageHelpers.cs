@@ -26,6 +26,9 @@ namespace Beata.Medrek
                 case ApplicationPage.MainMenu:
                     return new MainMenuPage(viewModel as MainMenuPageViewModel);
 
+                case ApplicationPage.PatientInformation:
+                    return new PatientInformationPage(viewModel as Patient);
+
                 default:
                     Debugger.Break();
                     return null;
@@ -45,6 +48,9 @@ namespace Beata.Medrek
 
             if (page is MainMenuPage)
                 return ApplicationPage.MainMenu;
+
+            if (page is PatientInformationPage)
+                return ApplicationPage.PatientInformation;
 
             // Alert developer of issue
             Debugger.Break();
